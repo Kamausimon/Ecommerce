@@ -9,9 +9,18 @@ use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Storage;
 use App\Models\ProductInventory;
 
+
+
 class ProductController extends Controller
 {
+    public function debug_to_console($data)
+    {
+        $output = $data;
 
+        if (is_array($output)) $output = implode(",", $output);
+
+        echo "<script>console.log('Debug Objects: " . $output . "') </script>";
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -41,7 +50,8 @@ class ProductController extends Controller
             'discount_id' => 'nullable|exists:discount,id'
         ]);
 
-        Log::info('Validation passed, proceeding to create product.');
+        Log::channel('product_log')->info('Validation passed, proceeding to create product.', ['data' => $validatedData]);
+        debug_to_console($validatedData);
 
         try {
             // Create the product
@@ -53,7 +63,8 @@ class ProductController extends Controller
                 $sku = 'SKU-' . time() . '-' . rand(1000, 9999);
             } while (Product::where('SKU', $sku)->exists());
 
-            Log::info('SKU generated: ' . $sku);
+            Log::channel('product_log')->info('SKU generated: ' . $sku, ['data' => $sku]);
+            debug_to_console($sku);
 
             // Handle the image upload
             if ($request->hasFile('image')) {
@@ -72,7 +83,8 @@ class ProductController extends Controller
                 $defaultInventoryId = $inventory->id;
             }
 
-            Log::info('Inventory id created successfully' . $inventory->id);
+            Log::channel('product_log')->info('Inventory id created successfully' . $inventory->id, ['data' => $inventory->id]);
+            debug_to_console($inventory->id);
 
             $product->description = $validatedData['description'];
             $product->SKU = $sku;
@@ -83,10 +95,10 @@ class ProductController extends Controller
 
             // Save the product
             $product->save();
-            Log::info('Product saved successfully: ' . $product->id);
+            Log::channel('product_log')->info('Product saved successfully: ' . $product->id, ['data' => $product]);
 
             // Debugging output
-            dd($product);
+            debug_to_console($product);
 
             // Redirect the user to see the created product
             // return redirect()->route('dashboard.show', ['product' => $product->id])
