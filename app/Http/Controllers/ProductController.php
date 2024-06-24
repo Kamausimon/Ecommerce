@@ -50,7 +50,7 @@ class ProductController extends Controller
             'discount_id' => 'nullable|exists:discount,id'
         ]);
 
-        Log::channel('product_log')->info('Validation passed, proceeding to create product.', ['data' => $validatedData]);
+        Log::info('Validation passed, proceeding to create product.', ['data' => $validatedData]);
         debug_to_console($validatedData);
 
         try {
@@ -63,7 +63,7 @@ class ProductController extends Controller
                 $sku = 'SKU-' . time() . '-' . rand(1000, 9999);
             } while (Product::where('SKU', $sku)->exists());
 
-            Log::channel('product_log')->info('SKU generated: ' . $sku, ['data' => $sku]);
+            Log::info('SKU generated: ' . $sku, ['data' => $sku]);
             debug_to_console($sku);
 
             // Handle the image upload
@@ -83,7 +83,7 @@ class ProductController extends Controller
                 $defaultInventoryId = $inventory->id;
             }
 
-            Log::channel('product_log')->info('Inventory id created successfully' . $inventory->id, ['data' => $inventory->id]);
+            Log::info('Inventory id created successfully' . $inventory->id, ['data' => $inventory->id]);
             debug_to_console($inventory->id);
 
             $product->description = $validatedData['description'];
@@ -95,10 +95,9 @@ class ProductController extends Controller
 
             // Save the product
             $product->save();
-            Log::channel('product_log')->info('Product saved successfully: ' . $product->id, ['data' => $product]);
+            Log::info('Product saved successfully: ' . $product->id, ['data' => $product]);
 
-            // Debugging output
-            debug_to_console($product);
+            dd($product);
 
             // Redirect the user to see the created product
             // return redirect()->route('dashboard.show', ['product' => $product->id])

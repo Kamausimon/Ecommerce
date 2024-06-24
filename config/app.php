@@ -123,15 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    // 'providers' => [
-    //     // Other service providers...
-    //     Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
-    // ],
-
-    // 'aliases' => [
-    //     // Other facades...
-    //     'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
-    // ],
 
 
 
