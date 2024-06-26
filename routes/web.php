@@ -27,7 +27,7 @@ Route::get('/product/{id}', [DashboardController::class, 'show'])->name('dashboa
 
 //product controller
 Route::get('/createProduct', [ProductController::class, 'create'])->name('Products.create');
-Route::post('/storeProduct', [ProductController::class, 'store']);
+Route::post('/storeProduct', [ProductController::class, 'store'])->name('Products.store');
 Route::get('/editProduct/{id}/edit', [ProductController::class, 'edit'])->name('Products.edit');
 Route::post('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update');
 Route::post('/deleteProduct/{id}', [ProductController::class, 'delete'])->name('Products.delete');

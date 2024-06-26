@@ -4,7 +4,7 @@
 
 <body class="bg-gray-100">
     <div class="max-w-md mx-auto my-10 bg-white p-8 rounded-lg shadow-md">
-        <form action="/storeProduct" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <form action="{{route('Products.store')}}" method="POST" enctype="multipart/form-data" class="space-y-4">
             @csrf
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
