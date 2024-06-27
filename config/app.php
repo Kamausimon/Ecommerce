@@ -123,7 +123,9 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-
+    // 'providers' => [
+    //     Arcanedev\LogViewer\LogViewerServiceProvider::class,
+    // ],
 
 
 
