@@ -103,7 +103,7 @@ class ProductController extends Controller
             Log::info('Inventory id created successfully: ' . $inventoryId, ['data' => $inventoryId]);
 
             $product->name = $validatedData['name'];
-            $product->image_path = $validatedData['image_path'];
+            $product->image_path = $validatedData['image'];
             $product->description = $validatedData['description'];
             $product->SKU = $sku;
             $product->price = $validatedData['price'];
@@ -119,7 +119,7 @@ class ProductController extends Controller
             DB::commit();
 
             // For debugging: Output the product
-            dd($product);
+
 
             // Redirect the user to see the created product
             // return redirect()->route('dashboard.show', ['product' => $product->id])
