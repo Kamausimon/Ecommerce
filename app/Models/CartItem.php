@@ -9,6 +9,8 @@ class CartItem extends Model
 {
     use HasFactory;
 
+    protected $table = 'cart_item';
+
     public function product()
     {
         //a product belongs to a cart item

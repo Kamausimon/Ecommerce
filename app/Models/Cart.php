@@ -9,6 +9,8 @@ class Cart extends Model
 {
     use HasFactory;
 
+    protected $table = 'cart';
+
     public function user()
     {
         //a cart belongs to a single user

@@ -9,6 +9,8 @@ class orders extends Model
 {
     use HasFactory;
 
+    protected $table = 'orders';
+
     public function payment()
     { //orders has one payment
         return $this->hasOne('App\Models\Payment', 'payment_id');

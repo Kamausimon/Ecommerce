@@ -8,27 +8,22 @@ use Illuminate\Support\Facades\Log;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Storage;
 use App\Models\ProductInventory;
+use illuminate\support\facades\DB;
+use App\Models\Discount;
 
 
 
 class ProductController extends Controller
 {
-    public function debug_to_console($data)
-    {
-        $output = $data;
 
-        if (is_array($output)) $output = implode(",", $output);
-
-        echo "<script>console.log('Debug Objects: " . $output . "') </script>";
-    }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
         //
-        $categories = ProductCategory::WhereNull('parent_id')->with('subCategories')->get();
-        return view('Products.create', compact('categories'));
+        $categories = ProductCategory::WhereNull('parent_id')->with('subCategories')->get(); // Get all the categories
+        return view('Products.create', compact('categories')); // Return the view with the categories
     }
 
     /**
@@ -39,24 +34,53 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+
+
+
         // Validate the data including the image
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Updated validation rule for image
-            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'required|max:1000',
             'price' => 'required|numeric|min:0',
-            'category_id' => 'required|exists:product_category,id',
-            'inventory_id' => 'required|exists:product_inventory,id',
-            'discount_id' => 'nullable|exists:discount,id'
+            'category_id' => 'required|exists:product_category,id'
         ]);
 
         Log::info('Validation passed, proceeding to create product.', ['data' => $validatedData]);
-        debug_to_console($validatedData);
+
 
         try {
+            // Start a transaction
+            DB::beginTransaction();
+
             // Create the product
             $product = new Product;
             $product->name = $validatedData['name'];
+
+            // Handle inventory ID
+            $inventoryId = $request->input('inventory_id');
+            if (!$inventoryId) {
+                $inventory = new ProductInventory();
+                $inventory->quantity = 0;
+                $inventory->location = 'Default Location';
+                $inventory->status = 'in stock';
+                $inventory->save();
+                $inventoryId = $inventory->id;
+                Log::info('Inventory id created successfully: ' . $inventoryId, ['data' => $inventoryId]);
+            }
+
+            //handle discount
+            $discountId = $request->input('dicount_id');
+            if (!$discountId) {
+                $discount = new Discount();
+                $discount->discount_percentage = 0;
+                $discount->name = 'No Discount';
+                $discount->description = 'No Discount';
+                $discount->status = 0;
+                $discount->save();
+                $discountId = $discount->id;
+                Log::info('Discount id created successfully: ' . $discountId, ['data' => $discountId]);
+            }
 
             // Generate a unique SKU
             do {
@@ -64,7 +88,7 @@ class ProductController extends Controller
             } while (Product::where('SKU', $sku)->exists());
 
             Log::info('SKU generated: ' . $sku, ['data' => $sku]);
-            debug_to_console($sku);
+
 
             // Handle the image upload
             if ($request->hasFile('image')) {
@@ -74,35 +98,36 @@ class ProductController extends Controller
                 $product->image_path = $imagePath; // Save the path of the image
             }
 
-            $inventoryId = $request->input('inventory_id');
-            if (!$inventoryId) {
-                $inventory = new ProductInventory();
-                $inventory->quantity = 0;
-                $inventory->location = 'Default Location';
-                $inventory->save();
-                $defaultInventoryId = $inventory->id;
-            }
 
-            Log::info('Inventory id created successfully' . $inventory->id, ['data' => $inventory->id]);
-            debug_to_console($inventory->id);
 
+            Log::info('Inventory id created successfully: ' . $inventoryId, ['data' => $inventoryId]);
+
+            $product->name = $validatedData['name'];
+            $product->image_path = $validatedData['image_path'];
             $product->description = $validatedData['description'];
             $product->SKU = $sku;
             $product->price = $validatedData['price'];
             $product->category_id = $validatedData['category_id'];
-            $product->inventory_id = $inventoryId ?? $defaultInventoryId;
-            $product->discount_id = $validatedData['discount_id'];
+            $product->inventory_id = $inventoryId;
+            $product->discount_id = $validatedData['discount_id'] ?? null;
 
             // Save the product
             $product->save();
             Log::info('Product saved successfully: ' . $product->id, ['data' => $product]);
 
+            // Commit the transaction
+            DB::commit();
+
+            // For debugging: Output the product
             dd($product);
 
             // Redirect the user to see the created product
             // return redirect()->route('dashboard.show', ['product' => $product->id])
             //     ->with('success', 'Product created successfully');
         } catch (\Exception $e) {
+            // Rollback the transaction
+            DB::rollBack();
+
             Log::error('Error creating the product: ' . $e->getMessage());
             return redirect()->back()->withErrors(['error' => 'Failed to create product. Try again.']);
         }

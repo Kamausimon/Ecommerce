@@ -9,6 +9,8 @@ class Payment extends Model
 {
     use HasFactory;
 
+    protected $table = 'payments';
+
     public function user()
     {
         // a payment belongs to a user

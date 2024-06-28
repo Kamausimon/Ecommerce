@@ -9,6 +9,8 @@ class Discount extends Model
 {
     use HasFactory;
 
+    protected $table = 'discount';
+
     public function product()
     {
         return $this->belongsToMany('App\Models\Product', 'discount_product');

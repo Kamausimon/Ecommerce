@@ -9,6 +9,8 @@ class admin_type extends Model
 {
     use HasFactory;
 
+    protected $table = 'admin_type';
+
     public function admin_user()
     { //has alot of admin users registered to it
 

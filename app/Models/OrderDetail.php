@@ -9,6 +9,8 @@ class OrderDetails extends Model
 {
     use HasFactory;
 
+    protected $table = 'order_details';
+
     public function Order()
     {
         return $this->belongsTo('App\Models\Order', 'order_id');
