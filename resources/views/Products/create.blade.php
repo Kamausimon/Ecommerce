@@ -85,6 +85,7 @@
         descriptionCountSpan.textContent = `${descriptionTextarea.value.length}/500`;
     </script>
 
+    @include('partials._footer')
 </body>
 
 </html>

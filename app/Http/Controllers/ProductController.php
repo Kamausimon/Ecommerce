@@ -94,8 +94,11 @@ class ProductController extends Controller
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
-                $imagePath = $image->storeAs('images', $imageName, 'public');
-                $product->image_path = $imagePath; // Save the path of the image
+                $imagePath = $image->storeAs('public/images', $imageName);
+
+                Log::info('Image uploaded successfully', ['path' => $imagePath]);
+
+                $product->image_path = str_replace('public/', '', $imagePath); // Save the path of the image
             }
 
 
@@ -118,12 +121,11 @@ class ProductController extends Controller
             // Commit the transaction
             DB::commit();
 
-            // For debugging: Output the product
 
 
-            // Redirect the user to see the created product
-            // return redirect()->route('dashboard.show', ['product' => $product->id])
-            //     ->with('success', 'Product created successfully');
+            //Redirect the user to see the created product
+            return redirect()->route('dashboard.show', ['id' => $product->id])
+                ->with('success', 'Product created successfully');
         } catch (\Exception $e) {
             // Rollback the transaction
             DB::rollBack();
