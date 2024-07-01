@@ -24,27 +24,13 @@ class DashboardController extends Controller
         return view('dashboard.show', ['product' => $product]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function search(Request $request)
     {
-        //
-    }
+        $query = $request->input('query');
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $posts = Product::where('name', 'like', "%{$query}%")->orWhere('categiry', 'like', "%{$query}%")->paginate(15);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+
+        return view('profile.dashboard', ['posts' => $posts]);
     }
 }

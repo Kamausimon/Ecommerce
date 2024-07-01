@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
-@include('partials._head')
+@include('partials._head');
 
 <body class="bg-gray-100">
+
+
     <div class="max-w-md mx-auto my-10 bg-white p-8 rounded-lg shadow-md">
         <form action="{{ route('Products.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
             @csrf
