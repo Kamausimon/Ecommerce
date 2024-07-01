@@ -1,8 +1,8 @@
 <div>
 
-    @if($product->count())
+    @if($Product->count())
     <div>
-        @foreach($product as $produce)
+        @foreach($Product as $produce)
         <img class="w-full h-48 object-cover" src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}">
         <div class="p-4">
             <h2 class="text-lg font-semibold text-gray-900">{{ $product->name }}</h2>
