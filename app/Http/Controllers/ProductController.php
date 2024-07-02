@@ -107,7 +107,6 @@ class ProductController extends Controller
             Log::info('Inventory id created successfully: ' . $inventoryId, ['data' => $inventoryId]);
 
             $product->name = $validatedData['name'];
-            $product->image_path = $validatedData['image'];
             $product->description = $validatedData['description'];
             $product->SKU = $sku;
             $product->price = $validatedData['price'];

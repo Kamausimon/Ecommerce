@@ -3,7 +3,7 @@
           @if($products->count())
           <div>
               @foreach($products as $product)
-              <img class="w-full h-48 object-cover" src="{{ asset('storage/images/' . $product->image_path) }}" alt="{{ $product->name }}">
+              <img class="w-full h-48 object-cover" src="{{ asset('storage/'. $product->image_path) }}" alt="{{ $product->name }}">
               <div class="p-4">
                   <h2 class="text-lg font-semibold text-gray-900">{{ $product->name }}</h2>
                   <div class="mt-4 flex items-center justify-between">
