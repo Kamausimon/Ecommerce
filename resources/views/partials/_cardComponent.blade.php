@@ -12,6 +12,9 @@
               </div>
               @endforeach
           </div>
+          <div class="mt-6">
+              {{ $products->links()}}
+          </div>
           @else
           <p class="text-center text-gray-700">No products found</p>
           @endif

@@ -8,8 +8,11 @@
 
 <body class="bg-gray-100">
     <div class="flex justify-center items-center h-full">
-        <a href="{{ route('dashboard.index') }}" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">
+        <a href="{{ route('dashboard.index') }}" class="text-gray-500 hover:text-gray-700 transition-colors duration-200 mt-3">
             <!-- SVG content -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24">
+                <path fill="grey" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z" />
+            </svg>
         </a>
     </div>
 
