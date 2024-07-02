@@ -32,7 +32,7 @@
                         <span class="font-semibold">${{ number_format($product->price, 2) }}</span>
                     </div>
                     @if($product->image_path)
-                    <img src="{{ asset('storage/images' . $product->image_path) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover">
+                    <img src="{{ asset('storage/images/' . $product->image_path) }}" alt="{{ $product->name }}" class="w-full h-64 object-cover">
                     @endif
                 </div>
             </div>
