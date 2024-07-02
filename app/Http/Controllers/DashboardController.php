@@ -10,8 +10,8 @@ class DashboardController extends Controller
     public function index()
     {
         //showcase all the various products
-        $products = Product::paginate(20);
-        return view('dashboard.index', ['products' => $products]);
+        $products = Product::paginate(15);
+        return view('dashboard.index', compact('products'));
     }
 
     /**

@@ -19,7 +19,7 @@
 
         <!-- data div -->
         <div class="bg-gray-300 font-sans h-screen">
-            @include('partials._cardComponent')
+            @include('partials._cardComponent');
         </div>
         <!-- end of data div -->
 

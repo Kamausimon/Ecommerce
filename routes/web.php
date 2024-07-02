@@ -25,16 +25,17 @@ Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.ind
 
 //dashboard controller
 Route::get('/products', [DashboardController::class, 'index'])->name('dashboard.index'); //displays all the created products
-Route::get('/product/{id}', [DashboardController::class, 'show'])->name('dashboard.show');
-Route::get('/Products/search', [dashboardController::class, 'search'])->name('Products.search');
+Route::get('/product/{id}', [DashboardController::class, 'show'])->name('dashboard.show'); //displays a single product
+Route::get('/Products/search', [dashboardController::class, 'search'])->name('Products.search'); //search for a product
 
 
 //product controller
-Route::get('/createProduct', [ProductController::class, 'create'])->name('Products.create');
-Route::post('/storeProduct', [ProductController::class, 'store'])->name('Products.store');
-Route::get('/editProduct/{id}/edit', [ProductController::class, 'edit'])->name('Products.edit');
-Route::post('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update');
-Route::post('/deleteProduct/{id}', [ProductController::class, 'delete'])->name('Products.delete');
+
+Route::get('/createProduct', [ProductController::class, 'create'])->name('Products.create'); //displays the form to create a product
+Route::post('/storeProduct', [ProductController::class, 'store'])->name('Products.store'); //stores the product
+Route::get('/editProduct/{id}/edit', [ProductController::class, 'edit'])->name('Products.edit'); //displays the form to edit a product
+Route::post('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update'); //updates the product
+Route::post('/deleteProduct/{id}', [ProductController::class, 'delete'])->name('Products.delete'); //deletes the product
 
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
