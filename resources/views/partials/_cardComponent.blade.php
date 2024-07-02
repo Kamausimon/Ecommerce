@@ -1,18 +1,17 @@
-      <div>
-
+      <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           @if($products->count())
-          <div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               @foreach($products as $product)
-              <img class="w-full h-48 object-cover" src="{{ asset('storage/'. $product->image_path) }}" alt="{{ $product->name }}">
-              <div class="p-4">
-                  <h2 class="text-lg font-semibold text-gray-900">{{ $product->name }}</h2>
-                  <div class="mt-4 flex items-center justify-between">
+              <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                  <img class="w-full h-32 object-cover" src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}">
+                  <div class="p-4 flex justify-between items-center">
                       <span class="text-lg font-bold text-gray-900">${{ number_format($product->price, 2) }}</span>
                       <a href="{{ route('dashboard.show', $product->id) }}" class="px-3 py-2 bg-indigo-600 text-white text-xs font-semibold rounded uppercase hover:bg-indigo-700">View Details</a>
                   </div>
               </div>
-
               @endforeach
           </div>
+          @else
+          <p class="text-center text-gray-700">No products found</p>
           @endif
       </div>
