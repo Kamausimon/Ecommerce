@@ -7,6 +7,7 @@ use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,3 +40,5 @@ Route::post('/deleteProduct/{id}', [ProductController::class, 'delete'])->name('
 
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+Route::get('/sidebar', [CategoryController::class, 'show'])->name('partials._sidebar');
