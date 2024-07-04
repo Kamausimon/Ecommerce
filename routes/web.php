@@ -40,5 +40,3 @@ Route::post('/deleteProduct/{id}', [ProductController::class, 'delete'])->name('
 
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-
-Route::get('/sidebar', [CategoryController::class, 'show'])->name('partials._sidebar');
