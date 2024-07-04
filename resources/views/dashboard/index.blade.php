@@ -11,7 +11,7 @@
     <!-- end of sidebar -->
 
     <!-- main body -->
-    <div class="ml-64 w-full bg-slate-700">
+    <div class="ml-64 w-full p-0 m-0 bg-slate-700">
 
         <!-- navbar -->
         @include('partials._dashNav')
