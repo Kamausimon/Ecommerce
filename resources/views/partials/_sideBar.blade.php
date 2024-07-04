@@ -10,11 +10,11 @@
                       @foreach($categories as $category)
                       <li>
                           {{$category->name}}
-                          @if($category->subCategories->count()> 0)
+                          @if($category->subcategories->count()> 0)
                           <ul>
-                              @foreach($category -> $subCategories as $subCategory)
+                              @foreach($category -> $subcategories as $subcategory)
                               <li>
-                                  {{$subCategory->name}}
+                                  {{$subcategory->name}}
                               </li>
                               @endforeach
                           </ul>
