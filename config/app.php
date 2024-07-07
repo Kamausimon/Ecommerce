@@ -125,7 +125,10 @@ return [
 
     'providers' => [
         App\Providers\AppServiceProvider::class,
-    ],
+        Illuminate\View\ViewServiceProvider::class,
+        Illuminate\Filesystem\FilesystemServiceProvider::class,
+        Illuminate\Cache\CacheServiceProvider::class,
+    ]
 
 
 
