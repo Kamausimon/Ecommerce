@@ -3,12 +3,12 @@
         <img class="block mt-4" src="/images/shope-high-resolution-logo-transparent.png" alt="logo" />
     </a>
 
-    <div class="mt-8">
+    <div class="mt-24">
         <h2 class="text-xl font-semibold text-gray-700">Categories</h2>
-        <ul class="mt-4">
+        <ul class="mt-6">
             @foreach($categories as $category)
             <li class="relative">
-                <button class="w-full text-left flex justify-between items-center py-2 px-4 text-gray-700 hover:bg-gray-100 focus:outline-none">
+                <button class="w-full text-left flex justify-between items-center py-4 px-4 text-gray-700 hover:bg-gray-100 focus:outline-none">
                     {{ $category->name }}
                     @if($category->subcategories->count() > 0)
                     <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
