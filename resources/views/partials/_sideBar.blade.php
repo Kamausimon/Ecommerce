@@ -49,9 +49,9 @@
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.subcategory-btn').forEach(button => { // Add event listener to each subcategory button
-            button.addEventListener('click', function() { // Fetch products for the selected subcategory
-                const subcategoryId = this.getAttribute('data-subcategory-id'); // Get the subcategory ID from the button's data attribute
+        document.querySelectorAll('.subcategory-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const subcategoryId = this.getAttribute('data-subcategory-id');
                 fetch(`/products/subcategory/${subcategoryId}`)
                     .then(response => response.json())
                     .then(data => {

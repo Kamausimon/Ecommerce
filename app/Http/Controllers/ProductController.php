@@ -204,6 +204,6 @@ class ProductController extends Controller
     public function showProductsBySubCategory($subCategoryId)
     {
         $products = Product::Where('subcategory_id', $subCategoryId)->paginate(15);
-        return response()->json($products);
+        return response()->json(['products' => $products->items()]);
     }
 }

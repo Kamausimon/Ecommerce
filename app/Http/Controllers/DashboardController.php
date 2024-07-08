@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
@@ -21,6 +22,8 @@ class DashboardController extends Controller
     {
         //    
         $product = Product::findOrFail($id);
+        Log::info("product retrieved");
+
         return view('dashboard.show', ['product' => $product]);
     }
 
@@ -28,9 +31,9 @@ class DashboardController extends Controller
     {
         $query = $request->input('query');
 
-        $posts = Product::where('name', 'like', "%{$query}%")->orWhere('categiry', 'like', "%{$query}%")->paginate(15);
+        $products = Product::where('name', 'like', "%{$query}%")->orWhere('categiry', 'like', "%{$query}%")->paginate(15);
 
 
-        return view('profile.dashboard', ['posts' => $posts]);
+        return view('dashboard.index', ['products' => $products]);
     }
 }

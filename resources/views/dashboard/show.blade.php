@@ -8,7 +8,7 @@
 
 <body class="bg-gray-100">
 
-    @include('partials._sidebar')
+    @include('partials._sideBar')
 
     <div class="ml-64">
         <div class=" bg-slate-700">
