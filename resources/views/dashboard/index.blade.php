@@ -6,7 +6,7 @@
 
 
     <!-- sidebar -->
-    @include('partials._sidebar')
+    @include('partials._sideBar')
 
     <!-- end of sidebar -->
 

@@ -22,10 +22,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        View::composer('partials._sideBar', function ($view) {
-            //fetch categories 
-            $categories = ProductCategory::whereNull('parent_id')->with('subcategories')->get();
-            $view->with('categories', $categories);
-        });
+
     }
 }
