@@ -18,7 +18,7 @@
         <!-- end of navbar -->
 
         <!-- data div -->
-        <div class="bg-gray-300 font-sans h-screen">
+        <div class="product-container bg-gray-300 font-sans h-screen">
             @include('partials._cardComponent');
         </div>
         <!-- end of data div -->
