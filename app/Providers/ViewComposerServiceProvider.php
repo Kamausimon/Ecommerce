@@ -3,9 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Log;
+use Illuminate\View\View;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -23,7 +24,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        View::composer('partials._sideBar', function ($view) {
+        Facades\View::composer('partials._sideBar', function ($view) {
             // Fetch categories
             $categories = ProductCategory::whereNull('parent_id')->with('subcategories')->get();
 
@@ -31,7 +32,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             Log::info('View composer is executed');
             Log::info("categories:", ["categories" => $categories]);
 
-            dd($categories);
+
             $view->with('categories', $categories);
         });
     }
