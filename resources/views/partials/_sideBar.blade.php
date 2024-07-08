@@ -3,12 +3,12 @@
         <img class="block mt-4" src="/images/shope-high-resolution-logo-transparent.png" alt="logo" />
     </a>
 
-    <div class="mt-24">
+    <div>
         <h2 class="text-xl font-semibold text-gray-700">Categories</h2>
-        <ul class="mt-6">
+        <ul class="mt-4">
             @foreach($categories as $category)
             <li class="relative">
-                <button class="w-full text-left flex justify-between items-center py-4 px-4 text-gray-700 hover:bg-gray-100 focus:outline-none">
+                <button class="w-full text-left flex justify-between items-center py-2 px-4 text-gray-700 hover:bg-gray-100 focus:outline-none">
                     {{ $category->name }}
                     @if($category->subcategories->count() > 0)
                     <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -20,7 +20,7 @@
                 <ul class="absolute left-0 mt-1 hidden bg-white border border-gray-200 shadow-lg rounded-md overflow-hidden z-10">
                     @foreach($category->subcategories as $subcategory)
                     <li>
-                        <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-gray-100">{{ $subcategory->name }}</a>
+                        <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-gray-100 subcategory-link" data-id="{{ $subcategory->id }}">{{ $subcategory->name }}</a>
                     </li>
                     @endforeach
                 </ul>
@@ -28,6 +28,13 @@
             </li>
             @endforeach
         </ul>
+    </div>
+</div>
+
+<div id="products-container" class="ml-72 p-4">
+    <h2 class="text-xl font-semibold text-gray-700">Products</h2>
+    <div id="products-list" class="grid grid-cols-1 gap-4 mt-4">
+        <!-- Products will be loaded here dynamically -->
     </div>
 </div>
 
@@ -44,6 +51,32 @@
                         menu.classList.add('hidden');
                     }
                 });
+            });
+        });
+
+        const subcategoryLinks = document.querySelectorAll('.subcategory-link');
+        subcategoryLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const subcategoryId = this.dataset.id;
+
+                fetch(`/products-by-subcategory/${subcategoryId}`)
+                    .then(response => response.json())
+                    .then(products => {
+                        const productsList = document.getElementById('products-list');
+                        productsList.innerHTML = ''; // Clear existing products
+
+                        products.forEach(product => {
+                            const productDiv = document.createElement('div');
+                            productDiv.classList.add('border', 'p-4', 'rounded', 'shadow');
+                            productDiv.innerHTML = `
+                                <h3 class="text-lg font-semibold">${product.name}</h3>
+                                <p>${product.description}</p>
+                                <p class="text-gray-500">${product.price}</p>
+                            `;
+                            productsList.appendChild(productDiv);
+                        });
+                    });
             });
         });
     });

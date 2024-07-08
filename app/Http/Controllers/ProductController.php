@@ -200,4 +200,10 @@ class ProductController extends Controller
 
         return view('categories.index', compact('categories'));
     }
+
+    public function showProductsBySubCategory($subCategoryId)
+    {
+        $products = Product::Where('subcategory_id', $subCategoryId)->get();
+        return response()->json($products);
+    }
 }

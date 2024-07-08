@@ -38,5 +38,7 @@ Route::get('/editProduct/{id}/edit', [ProductController::class, 'edit'])->name('
 Route::post('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update'); //updates the product
 Route::post('/deleteProduct/{id}', [ProductController::class, 'delete'])->name('Products.delete'); //deletes the product
 
-
+//cart controller
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+Route::get('/products-by-subcategory/{subcategoryId}', [ProductController::class, 'getProductsBySubcategory']);
