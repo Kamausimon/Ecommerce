@@ -11,10 +11,15 @@
     <!-- end of sidebar -->
 
     <!-- main body -->
-    <div class="ml-64 w-full p-0 m-0 bg-slate-700">
+    <div class="ml-64 w-full p-0 m-0 bg-slate-700 sticky top-0 z-50">
 
         <!-- navbar -->
-        @include('partials._dashNav')
+        <div class="bg-slate-700 sticky top-0 z-50">
+            @include('partials._dashNav')
+        </div>
+
+
+
         <!-- end of navbar -->
 
         <!-- data div -->
@@ -28,7 +33,10 @@
 
 
     <!-- footer -->
-    @include('partials._footer')
+    <div class="bg-slate-700 sticky bottom-0 z-50">
+        @include('partials._footer')
+    </div>
+
     <!-- end of footer -->
 </body>
 

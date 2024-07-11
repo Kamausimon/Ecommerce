@@ -31,7 +31,7 @@ class DashboardController extends Controller
     {
         $query = $request->input('query');
 
-        $products = Product::where('name', 'like', "%{$query}%")->orWhere('categiry', 'like', "%{$query}%")->paginate(15);
+        $products = Product::where('name', 'like', "%{$query}%")->orWhere('category', 'like', "%{$query}%")->paginate(15);
 
 
         return view('dashboard.index', ['products' => $products]);

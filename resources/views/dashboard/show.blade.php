@@ -16,6 +16,11 @@
         </div>
 
         <div class=" w-auto h-5/6 p-4 mt-2 ">
+            <a href="{{route('dashboard.index')}}" class="ml-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 48 48">
+                    <path fill="#2f88ff" fill-rule="evenodd" stroke="#000" stroke-linejoin="round" stroke-width="4" d="M44 40.8361C39.1069 34.8632 34.7617 31.4739 30.9644 30.6682C27.1671 29.8625 23.5517 29.7408 20.1182 30.303V41L4 23.5453L20.1182 7V17.167C26.4667 17.2172 31.8638 19.4948 36.3095 24C40.7553 28.5052 43.3187 34.1172 44 40.8361Z" clip-rule="evenodd" />
+                </svg>
+            </a>
             <div class="max-w-xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
                 <div class="px-4 py-5">
                     <h2 class="text-xl font-semibold text-gray-800">{{ $product->name }}</h2>
@@ -27,7 +32,15 @@
                 <div class="px-4 py-4 bg-gray-50">
                     <span class="text-gray-700">Price: </span>
                     <span class="font-semibold">${{ number_format($product->price, 2) }}</span>
+
+                    <form action="{{route('cart.add')}}" method="POST" class="mt-4">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{$product->id}}">
+                        <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-800">Add To Cart</button>
+                    </form>
+
                 </div>
+
 
             </div>
         </div>

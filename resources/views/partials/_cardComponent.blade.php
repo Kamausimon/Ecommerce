@@ -1,4 +1,4 @@
-      <div class="max-w-7xl mx-auto py-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl  py-4 sm:px-6 lg:px-8">
           @if($products->count())
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
               @foreach($products as $product)

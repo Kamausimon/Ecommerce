@@ -41,3 +41,4 @@ Route::get('/products/subcategory/{subcategoryId}', [ProductController::class, '
 
 //cart controller
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add', [cartController::class, 'add'])->name('cart.add');
