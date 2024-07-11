@@ -3,15 +3,14 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Log;
+
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LandingPageController;
 
-Route::get('/', function () {
-    return view('User.welcome');
-});
+
 
 
 
@@ -39,3 +38,6 @@ Route::get('/products/subcategory/{subcategoryId}', [ProductController::class, '
 //cart controller
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [cartController::class, 'add'])->name('cart.add');
+
+//landingPageController
+Route::get('/landing', [LandingPageController::class, 'index'])->name('landing.index');
