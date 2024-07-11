@@ -10,12 +10,9 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('User.welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
 
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
