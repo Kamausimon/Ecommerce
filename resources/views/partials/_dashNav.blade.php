@@ -9,6 +9,7 @@
     <div>
         <div class="flex gap-4">
             <a href="{{route('cart.index')}}" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100">
+                Cart:
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512" fill="white">
                     <circle cx="176" cy="416" r="32" />
                     <circle cx="400" cy="416" r="32" />
@@ -17,6 +18,7 @@
             </a>
 
             <a href="{{route('profile.index')}}" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100">
+                Account:
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
                     <g stroke-linejoin="round">
                         <path d="M4 18a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
