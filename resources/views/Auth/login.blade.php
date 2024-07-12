@@ -5,7 +5,7 @@
 
 <body>
     <!-- nav -->
-
+    @include('partials._nav')
 
     <!-- end of nav -->
 

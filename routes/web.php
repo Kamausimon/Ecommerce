@@ -43,3 +43,4 @@ Route::get('/landing', [LandingPageController::class, 'index'])->name('landing.i
 //UserController
 Route::get('/login', [UserController::class, 'login'])->name('Auth.login');
 Route::post('/login', [UserController::class, 'store']);
+Route::get('/register', [UserController::class, 'Register'])->name('Auth.register');
