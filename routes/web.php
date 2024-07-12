@@ -41,4 +41,5 @@ Route::post('/cart/add', [cartController::class, 'add'])->name('cart.add');
 Route::get('/landing', [LandingPageController::class, 'index'])->name('landing.index');
 
 //UserController
-Route::get('/login', [UserController::class, 'index'])->name('Auth.login');
+Route::get('/login', [UserController::class, 'login'])->name('Auth.login');
+Route::post('/login', [UserController::class, 'store']);
