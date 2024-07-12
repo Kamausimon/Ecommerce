@@ -18,6 +18,11 @@ class UserController extends Controller
 
     public function Register()
     {
+        return view('Auth.register');
+    }
+
+    public function RegisterUser()
+    {
     }
 
     public function Logout()
