@@ -5,7 +5,7 @@
 
 <body>
     <!-- nav start -->
-    <div class="flex flex-row justify-between items-center p-4 bg-slate-800 ">
+    <div class="flex flex-row justify-between items-center p-4 bg-slate-800 sticky top-0 z-50 ">
 
 
         <img class="block  w-24 h-auto ml-6" src="/images/shope-high-resolution-logo-transparent.png" alt="logo" />
@@ -29,13 +29,8 @@
                     </svg>
                 </a>
 
-                <a href="{{route('profile.index')}}" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
-                        <g stroke-linejoin="round">
-                            <path d="M4 18a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
-                            <circle cx="12" cy="7" r="3" />
-                        </g>
-                    </svg>
+                <a href="{{route('profile.index')}}" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 text-white">
+                    Login
                 </a>
             </div>
         </div>
@@ -45,12 +40,8 @@
     <!-- nav end -->
 
     <!-- data -->
-    <div>
-
-        <div>
-
-        </div>
-
+    <div class="product-container bg-gray-300 font-sans h-screen ">
+        @include('partials._cardComponent');
     </div>
     <!-- end of data div -->
 
