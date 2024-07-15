@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 @include('partials._head')
 
-<body>
-    @include('partials._nav')
+<body class="bg-slate-700">
 
-    <!-- data div  -->
-    <div class="w-full max-w-xs mx-auto mt-36">
-        <form action="/registerUser" method="POST" class="bg-white shadow-md rounded px-8 pt-6 mb-4 pb-8">
+
+    @include("partials._nav")
+    <!--div housing the registration form-->
+    <div class="w-full max-w-xs mx-auto mt-24">
+
+
+        <form action="/registerUser" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             @csrf
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="fName">
@@ -28,6 +32,21 @@
                 <span class="text-red-500 text-xs italic">{{ $message }}</span>
                 @enderror
             </div>
+
+            <div class="mb-4">
+                <label for="Mobile" class="block text-gray-700 text-sm font-bold mb-2">
+                    Mobile:
+                </label>
+                <div class="flex">
+                    <span class="shadow appearance-none border rounded-l w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-200">+254</span>
+                    <input class="shadow appearance-none border-t border-b border-r rounded-r w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{old('mobile')}}" type="number" name="mobile" id="mobile" placeholder="mobile..">
+                </div>
+                @error('mobile') <!-- Fixed the error name to 'mobile' -->
+                <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                @enderror
+            </div>
+
+
 
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
@@ -57,10 +76,11 @@
             </div>
         </form>
     </div>
+    <!--end of the div-->
 
-    <!-- end of data div -->
-
+    <!--footer-->
     @include('partials._footer')
+    <!--end of footer-->
     <script defer>
         const togglePassword = document.getElementById('togglePassword');
         const password = document.getElementById('password');
