@@ -54,18 +54,18 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|confirmed',
-            'mobile' => 'required|digits_between:10,15|unique:users'
+            'Mobile' => 'required|digits_between:10,15|unique:users'
         ]);
 
         $user = User::Create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'mobile' => $request->mobile
+            'Mobile' => $request->Mobile
         ]);
 
         Auth::login($user);
 
-        return redirect()->route('login')->with('Success', 'user registered successfully');
+        return redirect()->route('Auth.login')->with('Success', 'user registered successfully');
     }
 }

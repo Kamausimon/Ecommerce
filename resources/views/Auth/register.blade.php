@@ -39,13 +39,12 @@
                 </label>
                 <div class="flex">
                     <span class="shadow appearance-none border rounded-l w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-200">+254</span>
-                    <input class="shadow appearance-none border-t border-b border-r rounded-r w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{old('mobile')}}" type="number" name="mobile" id="mobile" placeholder="mobile..">
+                    <input class="shadow appearance-none border-t border-b border-r rounded-r w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('Mobile') }}" type="text" name="Mobile" id="Mobile" placeholder="Mobile..">
                 </div>
-                @error('mobile') <!-- Fixed the error name to 'mobile' -->
+                @error('Mobile')
                 <span class="text-red-500 text-xs italic">{{ $message }}</span>
                 @enderror
             </div>
-
 
 
             <div class="mb-4">
