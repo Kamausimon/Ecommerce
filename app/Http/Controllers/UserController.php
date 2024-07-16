@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Promise\Create;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,16 +18,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->merge([
-            'email' => trim($request->email)
-        ]);
-
-        $request->validate([
-          'name'=> 'required|max:255',
-          'email'=> 'required|email|unique:users',
-          'password'=>'required|min:8|confirmed',
-          'mobile'=>
-        ]);
     }
 
     public function Register()
@@ -32,8 +25,25 @@ class UserController extends Controller
         return view('Auth.register');
     }
 
-    public function RegisterUser()
+    public function RegisterUser(Request $request)
     {
+        $request->merge([
+            'email' => trim($request->email)
+        ]);
+
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8|confirmed',
+            'mobile' => 'required|digits_between:10,15|unique:users'
+        ]);
+
+        $user = User::Create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+
+        ]);
     }
 
     public function Logout()
