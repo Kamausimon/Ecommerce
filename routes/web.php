@@ -45,3 +45,4 @@ Route::get('/login', [UserController::class, 'login'])->name('Auth.login');
 Route::post('/login', [UserController::class, 'store']);
 Route::get('/register', [UserController::class, 'Register'])->name('Auth.register');
 Route::post('registerUser', [UserController::class, 'RegisterUser']);
+Route::post('/logoutUser', [UserController::class, 'destroy'])->name('Auth.logout');

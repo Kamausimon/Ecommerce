@@ -7,6 +7,7 @@ use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -18,6 +19,22 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8'
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
+            $request->session()->regenerate();
+
+            return redirect()->route('dashboard.index');
+        }
+
+        return back()->withErrors([
+            'login' => 'one of the fields is incorrect'
+        ]);
     }
 
     public function Register()
@@ -42,11 +59,15 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-
+            'mobile' => $request->mobile
         ]);
+
+        Auth::login($user);
+
+        return redirect()->route('login')->with('Success', 'user registered successfully');
     }
 
-    public function Logout()
+    public function destroy()
     {
     }
 }
