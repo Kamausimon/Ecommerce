@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 
 class UserController extends Controller
 {
@@ -65,9 +67,5 @@ class UserController extends Controller
         Auth::login($user);
 
         return redirect()->route('login')->with('Success', 'user registered successfully');
-    }
-
-    public function destroy()
-    {
     }
 }

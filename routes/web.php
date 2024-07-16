@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LogoutController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\UserController;
+use Illuminate\Auth\Events\Logout;
 
 //profileController
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -45,4 +47,6 @@ Route::get('/login', [UserController::class, 'login'])->name('Auth.login');
 Route::post('/login', [UserController::class, 'store']);
 Route::get('/register', [UserController::class, 'Register'])->name('Auth.register');
 Route::post('registerUser', [UserController::class, 'RegisterUser']);
-Route::post('/logoutUser', [UserController::class, 'destroy'])->name('Auth.logout');
+
+//logoutcontroller
+Route::post('/logoutUser', [LogoutController::class, 'destroy'])->name('Auth.logout');
