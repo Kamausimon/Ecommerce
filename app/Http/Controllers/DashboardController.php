@@ -30,10 +30,18 @@ class DashboardController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query');
+        $products = Product::query();
 
-        $products = Product::where('name', 'like', "%{$query}%")->orWhere('category', 'like', "%{$query}%")->paginate(15);
+        if ($query) {
+            $products = $products->where('name', 'like', "%{$query}%")->orWhere('category', 'like', "%{$query}%");
+        }
 
+        $products = $products->paginate(15);
 
-        return view('dashboard.index', ['products' => $products]);
+        if (auth()->check()) {
+            return view('dashboard.index', ['products' => $products]);
+        } else {
+            return view('landing.index', ['products' => $products]);
+        }
     }
 }
