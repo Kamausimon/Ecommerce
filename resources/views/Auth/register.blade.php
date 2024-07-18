@@ -34,14 +34,14 @@
             </div>
 
             <div class="mb-4">
-                <label for="Mobile" class="block text-gray-700 text-sm font-bold mb-2">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="mobile">
                     Mobile:
                 </label>
                 <div class="flex">
                     <span class="shadow appearance-none border rounded-l w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-200">+254</span>
-                    <input class="shadow appearance-none border-t border-b border-r rounded-r w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('Mobile') }}" type="text" name="Mobile" id="Mobile" placeholder="Mobile..">
+                    <input class="shadow appearance-none border-t border-b border-r rounded-r w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('mobile') }}" type="text" name="mobile" id="mobile" placeholder="mobile..">
                 </div>
-                @error('Mobile')
+                @error('mobile')
                 <span class="text-red-500 text-xs italic">{{ $message }}</span>
                 @enderror
             </div>

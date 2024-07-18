@@ -54,14 +54,14 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|confirmed',
-            'Mobile' => 'required|digits_between:10,15|unique:users'
+            'mobile' => 'required|digits_between:10,15|unique:users'
         ]);
 
         $user = User::Create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'Mobile' => $request->Mobile
+            'mobile' => $request->mobile
         ]);
 
         Auth::login($user);
