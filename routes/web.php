@@ -11,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Auth\Events\Logout;
 
 //profileController
@@ -45,8 +46,10 @@ Route::get('/landing', [LandingPageController::class, 'index'])->name('landing.i
 //UserController
 Route::get('/login', [UserController::class, 'login'])->name('Auth.login');
 Route::post('/login', [UserController::class, 'store']);
-Route::get('/register', [UserController::class, 'Register'])->name('Auth.register');
-Route::post('registerUser', [UserController::class, 'RegisterUser']);
+
+//registerController
+Route::get('/register', [RegisterController::class, 'Register'])->name('Auth.register');
+Route::post('registerUser', [RegisterController::class, 'RegisterUser']);
 
 //logoutcontroller
 Route::post('/logoutUser', [LogoutController::class, 'destroy'])->name('Auth.logout');
