@@ -1,6 +1,6 @@
 <div class="flex flex-row justify-between p-6 ">
     <div>
-        <form action="{{route('Products.search')}}" method="GET" class="flex gap-2">
+        <form action="{{route('Product.search')}}" method="GET" class="flex gap-2">
             <input type="search" placeholder="search here" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700">Search</button>
         </form>

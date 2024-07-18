@@ -25,11 +25,8 @@ Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.ind
 Route::middleware(['auth'])->group(function () {
     Route::get('/products', [DashboardController::class, 'index'])->name('dashboard.index'); //displays all the created products
     Route::get('/product/{id}', [DashboardController::class, 'show'])->name('dashboard.show'); //displays a single product
+    Route::get('/Product/search', [DashboardController::class, 'search'])->name('Product.search'); //search for a product
 });
-
-//searchController
-Route::get('/Products/search', [DashboardController::class, 'search'])->name('Products.search'); //search for a product
-
 
 
 //product controller

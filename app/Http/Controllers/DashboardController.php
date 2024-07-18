@@ -27,21 +27,20 @@ class DashboardController extends Controller
         return view('dashboard.show', ['product' => $product]);
     }
 
+
+
     public function search(Request $request)
     {
         $query = $request->input('query');
-        $products = Product::query();
+        Log::info("Search query: " . $query);
 
-        if ($query) {
-            $products = $products->where('name', 'like', "%{$query}%")->orWhere('category', 'like', "%{$query}%");
-        }
+        $products = Product::where('name', 'like', "%{$query}%")
+            ->orWhereHas('category', function ($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%");
+            })->paginate(15);
 
-        $products = $products->paginate(15);
+        Log::info("Products found: " . $products->count());
 
-        if (auth()->check()) {
-            return view('dashboard.index', ['products' => $products]);
-        } else {
-            return view('landing.index', ['products' => $products]);
-        }
+        return view('dashboard.index', ['products' => $products]);
     }
 }
