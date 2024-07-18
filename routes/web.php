@@ -22,9 +22,14 @@ Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.ind
 
 
 //dashboard controller
-Route::get('/products', [DashboardController::class, 'index'])->name('dashboard.index'); //displays all the created products
-Route::get('/product/{id}', [DashboardController::class, 'show'])->name('dashboard.show'); //displays a single product
-Route::get('/Products/search', [dashboardController::class, 'search'])->name('Products.search'); //search for a product
+Route::middleware(['auth'])->group(function () {
+    Route::get('/products', [DashboardController::class, 'index'])->name('dashboard.index'); //displays all the created products
+    Route::get('/product/{id}', [DashboardController::class, 'show'])->name('dashboard.show'); //displays a single product
+});
+
+//searchController
+Route::get('/Products/search', [DashboardController::class, 'search'])->name('Products.search'); //search for a product
+
 
 
 //product controller
@@ -42,6 +47,8 @@ Route::post('/cart/add', [cartController::class, 'add'])->name('cart.add');
 
 //landingPageController
 Route::get('/landing', [LandingPageController::class, 'index'])->name('landing.index');
+Route::get('/landing/product/{id}', [LandingPageController::class, 'show'])->name('landing.show');
+
 
 //UserController
 Route::get('/login', [UserController::class, 'login'])->name('Auth.login');
