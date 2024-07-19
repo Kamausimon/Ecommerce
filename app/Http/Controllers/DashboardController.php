@@ -29,18 +29,19 @@ class DashboardController extends Controller
 
 
 
+
+
+
     public function search(Request $request)
     {
-        $query = $request->input('query');
-        Log::info("Search query: " . $query);
 
-        $products = Product::where('name', 'like', "%{$query}%")
-            ->orWhereHas('category', function ($q) use ($query) {
-                $q->where('name', 'like', "%{$query}%");
-            })->paginate(15);
+        $keyword = $request->input('search');
+        Log::info("Search query: " . $keyword);
 
-        Log::info("Products found: " . $products->count());
+        // Search for products by name only
+        $products = Product::where('name', 'like', '%' . $keyword . '%')->orWhere('category', 'like', '%' . $keyword . '%')->get();
 
+        // Ensure the correct view is being returned
         return view('dashboard.index', ['products' => $products]);
     }
 }
