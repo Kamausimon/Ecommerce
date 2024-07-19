@@ -39,4 +39,12 @@ class LandingPageController extends Controller
         // Return the view with the products
         return view('User.welcome', ['products' => $products]);
     }
+
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+        Log::info("product retrieved");
+
+        return view('landing.show', ['product' => $product]);
+    }
 }
