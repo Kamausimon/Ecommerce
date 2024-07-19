@@ -43,7 +43,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [cartController::class, 'add'])->name('cart.add');
 
 //landingPageController
-Route::get('/landing', [LandingPageController::class, 'index'])->name('landing.index');
+Route::get('/landing', [LandingPageController::class, 'index'])->name('User.welcome');
 Route::get('/landing/product/{id}', [LandingPageController::class, 'show'])->name('landing.show');
 Route::get('/search', [LandingPageController::class, 'search']);
 

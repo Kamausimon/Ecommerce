@@ -1,8 +1,8 @@
 <div class="flex flex-row justify-between items-center p-4 bg-slate-800 sticky top-0 z-50 ">
-    <a href="{{route('landing.index')}}">
+    <a href="{{route('User.welcome')}}">
         <img class="block w-24 h-auto ml-6" src="/images/shope-high-resolution-logo-transparent.png" alt="logo" />
     </a>
-    @if(request()->routeIs('landing.index'))
+    @if(request()->routeIs('User.welcome'))
     <a href="#" class="text-white">Categories</a>
     <a href="#" class="text-white">What's new</a>
 
@@ -15,7 +15,7 @@
     @endif
     <div>
         <div class="flex gap-4">
-            @if(request()->routeIs('landing.index'))
+            @if(request()->routeIs('User.welcome'))
             <a href="{{ route('cart.index') }}" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 text-white">
                 Cart
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="26" viewBox="0 0 512 512" fill="white">
