@@ -7,7 +7,14 @@
                   <p class="text-gray-800 text-lg font-semibold ml-3">{{ $product->name }}</p>
                   <div class="p-4 flex justify-between items-center">
                       <span class="text-lg font-bold text-gray-900">${{ number_format($product->price, 2) }}</span>
+
+                      @auth
                       <a href="{{ route('dashboard.show', $product->id) }}" class="px-3 py-2 bg-indigo-600 text-white text-xs font-semibold rounded uppercase hover:bg-indigo-700">View Details</a>
+                      @endauth
+
+                      @guest
+                      <a href="{{ route('landing.show', $product->id) }}" class="px-3 py-2 bg-indigo-600 text-white text-xs font-semibold rounded uppercase hover:bg-indigo-700">View Details</a>
+                      @endguest
                   </div>
               </div>
               @endforeach
