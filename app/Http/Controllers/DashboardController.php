@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -28,23 +29,27 @@ class DashboardController extends Controller
     }
 
 
-
-
-
-
     public function search(Request $request)
     {
+        $query = $request->input('query'); // Capture the 'query' parameter from the request
 
-        $keyword = $request->input('search');
-        Log::info("Search query: " . $keyword);
+        // Log the search term for debugging
+        Log::info("Search Term: " . $query);
 
-        // Search for products by name only
-        $products = Product::where('name', 'like', '%' . $keyword . '%')
-            ->orWhereHas('category', function ($q) use ($keyword) {
-                $q->where('name', 'like', '%' . $keyword . '%');
+        // Enable query log
+        DB::enableQueryLog();
+
+        // Build the query
+        $products = Product::where('name', 'like', "%{$query}%")
+            ->orWhereHas('category', function ($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%");
             })->paginate(15);
 
-        // Ensure the correct view is being returned
+        // Get the query log
+        $queryLog = DB::getQueryLog();
+        Log::info("SQL Query Log: ", $queryLog);
+
+        // Return the view with the products
         return view('dashboard.index', ['products' => $products]);
     }
 }

@@ -25,7 +25,7 @@ Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.ind
 Route::middleware(['auth'])->group(function () {
     Route::get('/products', [DashboardController::class, 'index'])->name('dashboard.index'); //displays all the created products
     Route::get('/product/{id}', [DashboardController::class, 'show'])->name('dashboard.show'); //displays a single product
-    Route::get('/Product/search', [DashboardController::class, 'search'])->name('Product.search'); //search for a product
+    Route::get('Product/search', [DashboardController::class, 'search'])->name('Product.search'); //search for a product
 });
 
 
@@ -45,6 +45,7 @@ Route::post('/cart/add', [cartController::class, 'add'])->name('cart.add');
 //landingPageController
 Route::get('/landing', [LandingPageController::class, 'index'])->name('landing.index');
 Route::get('/landing/product/{id}', [LandingPageController::class, 'show'])->name('landing.show');
+Route::get('/search', [LandingPageController::class, 'search']);
 
 
 //UserController
