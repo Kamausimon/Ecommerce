@@ -39,7 +39,10 @@ class DashboardController extends Controller
         Log::info("Search query: " . $keyword);
 
         // Search for products by name only
-        $products = Product::where('name', 'like', '%' . $keyword . '%')->orWhere('category', 'like', '%' . $keyword . '%')->get();
+        $products = Product::where('name', 'like', '%' . $keyword . '%')
+            ->orWhereHas('category', function ($q) use ($keyword) {
+                $q->where('name', 'like', '%' . $keyword . '%');
+            })->paginate(15);
 
         // Ensure the correct view is being returned
         return view('dashboard.index', ['products' => $products]);
