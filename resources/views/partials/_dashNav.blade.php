@@ -8,17 +8,15 @@
     </div>
 
     <div>
-        <div class="flex gap-4">
-            <a href="{{route('cart.index')}}" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100">
+        <div class="flex gap-x-10">
+            <a href="{{route('cart.index')}}" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 text-white ">
                 Cart:
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512" fill="white">
-                    <circle cx="176" cy="416" r="32" />
-                    <circle cx="400" cy="416" r="32" />
-                    <path d="M167.78 304h261.34l38.4-192H133.89l-8.47-48H32v32h66.58l48 272H432v-32H173.42z" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="4em" height="4em" viewBox="0 0 16 16">
+                    <path fill="white" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607L1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4a2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4a2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2a1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2a1 1 0 0 1 0-2" />
                 </svg>
             </a>
 
-            <a href="{{route('profile.index')}}" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100">
+            <a href="{{route('profile.index')}}" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 text-white">
                 Account:
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
                     <g stroke-linejoin="round">

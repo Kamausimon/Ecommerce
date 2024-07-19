@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Auth\Events\Logout;
 
+
 //profileController
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -39,12 +40,15 @@ Route::post('/deleteProduct/{id}', [ProductController::class, 'delete'])->name('
 Route::get('/products/subcategory/{subcategoryId}', [ProductController::class, 'showProductsBySubcategory']); //displays products by subcategory
 
 //cart controller
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add', [cartController::class, 'add'])->name('cart.add');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [cartController::class, 'add'])->name('cart.add');
+});
+
 
 //landingPageController
 Route::get('/landing', [LandingPageController::class, 'index'])->name('User.welcome');
-Route::get('/landing/product/{id}', [LandingPageController::class, 'show'])->name('landing.show');
+Route::get('/landing/{id}', [LandingPageController::class, 'show'])->name('landing.show');
 Route::get('/search', [LandingPageController::class, 'search']);
 
 
