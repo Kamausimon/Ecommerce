@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/products', [DashboardController::class, 'index'])->name('dashboard.index'); //displays all the created products
     Route::get('/product/{id}', [DashboardController::class, 'show'])->name('dashboard.show'); //displays a single product
     Route::get('Product/search', [DashboardController::class, 'search'])->name('Product.search'); //search for a product
+    Route::get('/product/subcategory/{id}', [DashboardController::class, 'searchSidebar'])->name('sidebar.search');
 });
 
 

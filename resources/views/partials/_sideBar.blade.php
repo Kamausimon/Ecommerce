@@ -20,7 +20,9 @@
                 <ul class="absolute left-0 mt-1 hidden bg-white border border-gray-200 shadow-lg rounded-md overflow-hidden z-10">
                     @foreach($category->subcategories as $subcategory)
                     <li>
-                        <button class="subcategory-btn block py-2 px-4 text-gray-700 hover:bg-gray-100" data-subcategory-id="{{ $subcategory->id }}">{{ $subcategory->name }}</button>
+                        <a href="{{ route('sidebar.search', ['id' => $subcategory->id]) }}" class="block py-2 px-4 text-gray-700 hover:bg-gray-100">
+                            {{$subcategory->name}}
+                        </a>
                     </li>
                     @endforeach
                 </ul>

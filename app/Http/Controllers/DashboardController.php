@@ -52,4 +52,8 @@ class DashboardController extends Controller
         // Return the view with the products
         return view('dashboard.index', ['products' => $products]);
     }
+
+    public function searchSidebar()
+    {
+    }
 }
