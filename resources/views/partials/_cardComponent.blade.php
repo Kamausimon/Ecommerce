@@ -9,9 +9,9 @@
                       <span class="text-lg font-bold text-gray-900">${{ number_format($product->price, 2) }}</span>
 
                       @if(Auth::check())
-                      <a href="{{ route('dashboard.show', $product->id) }}" class="px-3 py-2 bg-indigo-600 text-white text-xs font-semibold rounded uppercase hover:bg-indigo-700">View Details (Auth)</a>
+                      <a href="{{ route('dashboard.show', $product->id) }}" class="px-3 py-2 bg-indigo-600 text-white text-xs font-semibold rounded uppercase hover:bg-indigo-700">View Details </a>
                       @else
-                      <a href="{{ route('landing.show', $product->id) }}" class="px-3 py-2 bg-indigo-600 text-white text-xs font-semibold rounded uppercase hover:bg-indigo-700">View Details (Guest)</a>
+                      <a href="{{ route('landing.show', $product->id) }}" class="px-3 py-2 bg-indigo-600 text-white text-xs font-semibold rounded uppercase hover:bg-indigo-700">View Details </a>
                       @endif
 
 

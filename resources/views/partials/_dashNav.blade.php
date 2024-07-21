@@ -30,15 +30,19 @@
                 </div>
             </a>
 
-            <a href="{{route('Auth.logout')}}" class=" ml-2 mr-3 flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 text-white">
+            <form action="{{ route('Auth.logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="bg-red-500 p-2 ml-2 hover:bg-red-800 rounded-md">
+                    <div class="flex space-x-3">
+                        <span class="ml-2">Logout</span>
+                        <svg class="mt-1" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                            <path fill="grey" d="M5 5h7V3H3v18h9v-2H5z" />
+                            <path fill="grey" d="m21 12l-4-4v3H9v2h8v3z" />
+                        </svg>
+                    </div>
 
-                <div class="w-10 h-10 rounded-full flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                        <path fill="white" d="M5 5h7V3H3v18h9v-2H5z" />
-                        <path fill="white" d="m21 12l-4-4v3H9v2h8v3z" />
-                    </svg>
-                </div>
-            </a>
+                </button>
+            </form>
 
         </div>
     </div>
