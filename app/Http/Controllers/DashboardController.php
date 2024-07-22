@@ -55,9 +55,15 @@ class DashboardController extends Controller
 
     public function sidebarSearch(Request $request)
     {
-        $subCategoryId = $request->input('id');
+        Log::info('Request Data', $request->all());
 
-        Log::info('filtering products by subcategory id', ['id' => $subCategoryId]);
+        $subCategoryId = $request->query('id');
+
+        if (is_null($subCategoryId)) {
+            Log::info('ID is null. Check if it is being passed correctly.');
+        } else {
+            Log::info('filtering products by subcategory id', ['id' => $subCategoryId]);
+        }
 
         DB::enableQueryLog();
 
