@@ -12,7 +12,7 @@
     <!-- data -->
     <div class="w-full max-w-xs mx-auto mt-36">
 
-        <form action="/login" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form action="{{route('Auth.loginUser')}}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             @csrf
             @if ($errors->has('login'))
             <span class="text-red-600 text-md">{{ $errors->first('login') }}</span>

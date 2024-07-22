@@ -55,7 +55,7 @@ Route::get('/search', [LandingPageController::class, 'search']);
 
 //UserController
 Route::get('/login', [UserController::class, 'login'])->name('Auth.login');
-Route::post('/login', [UserController::class, 'store']);
+Route::post('/loginUser', [UserController::class, 'store'])->name('Auth.loginUser');
 
 //registerController
 Route::get('/register', [RegisterController::class, 'Register'])->name('Auth.register');
