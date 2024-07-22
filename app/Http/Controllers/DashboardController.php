@@ -53,7 +53,23 @@ class DashboardController extends Controller
         return view('dashboard.index', ['products' => $products]);
     }
 
-    public function searchSidebar()
+    public function sidebarSearch(Request $request)
     {
+        $subCategoryId = $request->input('id');
+
+        Log::info('filtering products by subcategory id', ['id' => $subCategoryId]);
+
+        DB::enableQueryLog();
+
+        $products = Product::whereHas('category', function ($query) use ($subCategoryId) {
+            $query->whereHas('subcategory', function ($subQuery) use ($subCategoryId) {
+                $subQuery->where('id', $subCategoryId);
+            });
+        })->paginate(15);
+
+        $queryLog = DB::getQueryLog();
+        Log::info("SQL Query Log:", ['queryLog' => $queryLog]);
+
+        return view('dashboard.index', ['products' => $products]);
     }
 }
