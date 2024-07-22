@@ -18,7 +18,7 @@ class ProductCategory extends Model
         return $this->hasMany('App\Models\Product', 'category_id');
     }
 
-    public function parent()
+    public function parentCategory()
     {
         //the category has many subcategories
         return $this->belongsTo('App\Models\ProductCategory', 'parent_id');

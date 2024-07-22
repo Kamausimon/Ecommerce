@@ -55,22 +55,19 @@ class DashboardController extends Controller
 
     public function sidebarSearch(Request $request)
     {
-        Log::info('Request Data', $request->all());
+        $subCategoryId = $request->id;
 
-        $subCategoryId = $request->query('id');
 
-        if (is_null($subCategoryId)) {
-            Log::info('ID is null. Check if it is being passed correctly.');
-        } else {
-            Log::info('filtering products by subcategory id', ['id' => $subCategoryId]);
-        }
 
         DB::enableQueryLog();
 
         $products = Product::whereHas('category', function ($query) use ($subCategoryId) {
-            $query->whereHas('subcategory', function ($subQuery) use ($subCategoryId) {
-                $subQuery->where('id', $subCategoryId);
-            });
+            // Here we check if the product's category is a subcategory with the given ID
+            // or if the product's category has a parent category with the given ID
+            $query->where('id', $subCategoryId)
+                ->orWhereHas('parentCategory', function ($parentQuery) use ($subCategoryId) {
+                    $parentQuery->where('id', $subCategoryId);
+                });
         })->paginate(15);
 
         $queryLog = DB::getQueryLog();
