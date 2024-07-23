@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\LoginController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -32,13 +33,15 @@ Route::middleware(['auth'])->group(function () {
 
 
 //product controller
+Route::middleware(['auth'])->group(function () {
+    Route::get('/createProduct', [ProductController::class, 'create'])->name('Products.create'); //displays the form to create a product
+    Route::post('/storeProduct', [ProductController::class, 'store'])->name('Products.store'); //stores the product
+    Route::get('/editProduct/{id}/edit', [ProductController::class, 'edit'])->name('Products.edit'); //displays the form to edit a product
+    Route::post('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update'); //updates the product
+    Route::post('/deleteProduct/{id}', [ProductController::class, 'delete'])->name('Products.delete'); //deletes the product
+    Route::get('/products/subcategory/{subcategoryId}', [ProductController::class, 'showProductsBySubcategory']); //displays products by subcategory
+});
 
-Route::get('/createProduct', [ProductController::class, 'create'])->name('Products.create'); //displays the form to create a product
-Route::post('/storeProduct', [ProductController::class, 'store'])->name('Products.store'); //stores the product
-Route::get('/editProduct/{id}/edit', [ProductController::class, 'edit'])->name('Products.edit'); //displays the form to edit a product
-Route::post('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update'); //updates the product
-Route::post('/deleteProduct/{id}', [ProductController::class, 'delete'])->name('Products.delete'); //deletes the product
-Route::get('/products/subcategory/{subcategoryId}', [ProductController::class, 'showProductsBySubcategory']); //displays products by subcategory
 
 //cart controller
 Route::middleware(['auth'])->group(function () {
@@ -55,13 +58,13 @@ Route::get('/landing/{id}', [LandingPageController::class, 'show'])->name('landi
 Route::get('/search', [LandingPageController::class, 'search']);
 
 
-//UserController
-Route::get('/login', [UserController::class, 'login'])->name('Auth.login');
-Route::post('/loginUser', [UserController::class, 'store'])->name('Auth.loginUser');
+//LoginController
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('Auth.login');
+Route::post('/login', [LoginController::class, 'login'])->name('Auth.loginUser');
 
 //registerController
 Route::get('/register', [RegisterController::class, 'Register'])->name('Auth.register');
 Route::post('registerUser', [RegisterController::class, 'RegisterUser']);
 
 //logoutcontroller
-Route::post('/logoutUser', [LogoutController::class, 'destroy'])->name('Auth.logout');
+Route::post('/logoutUser', [LogoutController::class, 'destroy'])->name('Auth.logout')->middleware('auth');
