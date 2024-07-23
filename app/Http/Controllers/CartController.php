@@ -74,4 +74,14 @@ class cartController extends Controller
 
         return redirect()->route('cart.index')->with('success', 'cart cleared');
     }
+
+    private function getCart(Request $request)
+    {
+        return $request->session()->get('cart', []);
+    }
+
+    private function saveCart(Request $request, $cart)
+    {
+        return $request->session()->put('cart', $cart);
+    }
 }
