@@ -13,8 +13,7 @@ class cartController extends Controller
         if (!$request->session()->has('cart')) {
             $request->session()->put('cart', []);
         }
-
-        $cart = $request->session()->get('cart', []);
+        $cart = $this->getCart($request);
         Log::info('Cart Contents:', $cart);
         return view('cart.index', compact('cart'));
     }
@@ -24,7 +23,7 @@ class cartController extends Controller
         $product = $request->input('product');
         $quantity = $request->input('quantity');
 
-        $cart = $request->session()->get('cart', []);
+        $cart = $this->getCart($request);
 
         if (isset($cart[$product['id']])) {
             $cart[$product['id']]['quantity'] += $quantity;
@@ -37,7 +36,7 @@ class cartController extends Controller
             ];
         }
 
-        $request->session()->put('cart', $cart);
+        $this->saveCart($request, $cart);
         Log::info('Added to cart:', $cart);
 
         return redirect()->route('cart.index')->with('success', 'Product added to the cart');
@@ -47,7 +46,7 @@ class cartController extends Controller
         $cart = $request->session()->get('cart', []);
         if (isset($cart[$id])) {
             unset($cart[$id]);
-            $request->session()->put('cart', $cart);
+            $this->saveCart($request, $cart);
         }
 
         return redirect()->route('cart.index')->with('success', 'Product removed from cart!');
@@ -57,22 +56,29 @@ class cartController extends Controller
     {
         $quantity = $request->input('quantity');
 
-        $cart = $request->session()->get('cart', []);
+        // Validate quantity
+        if (!is_numeric($quantity) || $quantity < 1) {
+            return redirect()->route('cart.index')->with('error', 'Invalid quantity specified!');
+        }
+
+        $cart = $this->getCart($request);
 
         if (isset($cart[$id])) {
             $cart[$id]['quantity'] = $quantity;
-            $request->session()->put('cart', $cart);
+            $this->saveCart($request, $cart);
+            return redirect()->route('cart.index')->with('success', 'Cart updated!');
+        } else {
+            return redirect()->route('cart.index')->with('error', 'Product not found in cart!');
         }
-
-        return redirect()->route('cart.index')->with('success', 'cart updated!');
     }
     public function clear(Request $request)
     {
         $request->session()->forget('cart');
 
-        Log::info('cart cleared');
+        // Enhanced logging
+        Log::info('Cart cleared', ['session_id' => $request->session()->getId()]);
 
-        return redirect()->route('cart.index')->with('success', 'cart cleared');
+        return redirect()->route('cart.index')->with('success', 'Cart cleared');
     }
 
     private function getCart(Request $request)
