@@ -38,17 +38,40 @@ class cartController extends Controller
         }
 
         $request->session()->put('cart', $cart);
+        Log::info('Added to cart:', $cart);
 
         return redirect()->route('cart.index')->with('success', 'Product added to the cart');
     }
-    public function remove()
+    public function remove(Request $request, $id)
     {
+        $cart = $request->session()->get('cart', []);
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            $request->session()->put('cart', $cart);
+        }
+
+        return redirect()->route('cart.index')->with('success', 'Product removed from cart!');
     }
 
-    public function update()
+    public function update(Request $request, $id)
     {
+        $quantity = $request->input('quantity');
+
+        $cart = $request->session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] = $quantity;
+            $request->session()->put('cart', $cart);
+        }
+
+        return redirect()->route('cart.index')->with('success', 'cart updated!');
     }
-    public function clear()
+    public function clear(Request $request)
     {
+        $request->session()->forget('cart');
+
+        Log::info('cart cleared');
+
+        return redirect()->route('cart.index')->with('success', 'cart cleared');
     }
 }
