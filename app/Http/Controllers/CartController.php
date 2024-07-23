@@ -15,4 +15,11 @@ class cartController extends Controller
     public function add()
     {
     }
+    public function remove()
+    {
+    }
+
+    public function update()
+    {
+    }
 }

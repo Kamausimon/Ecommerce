@@ -37,8 +37,12 @@
                         </div>
                         <form action="{{route('cart.add')}}" method="POST" class="mt-4">
                             @csrf
-                            <input type="hidden" name="product_id" value="{{$product->id}}">
-                            <button class="px-12 py-2 bg-blue-500 text-white rounded hover:bg-blue-800">Add To Cart</button>
+                            <input type="hidden" name="product[id]" value="{{$product->id}}">
+                            <input type="hidden" name="product[name]" value="{{$product->name}}">
+                            <input type="hidden" name="product[price]" value="{{$product->price}}">
+                            <input type="hidden" name="product[image_path]" value="{{$product->image_path}}">
+                            <input type="number" name="quantity" value="1">
+                            <button type="submit" class="px-12 py-2 bg-blue-500 text-white rounded hover:bg-blue-800">Add To Cart</button>
                         </form>
                     </div>
                     <span class="italic underline text-lg mt-3"> features</span>
