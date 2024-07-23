@@ -14,6 +14,8 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Auth\Events\Logout;
+use Illuminate\Support\Facades\Log;
+
 
 
 //profileController
@@ -53,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 //landingPageController
-Route::get('/landing', [LandingPageController::class, 'index'])->name('User.welcome');
+Route::get('/', [LandingPageController::class, 'index'])->name('User.welcome');
 Route::get('/landing/{id}', [LandingPageController::class, 'show'])->name('landing.show');
 Route::get('/search', [LandingPageController::class, 'search']);
 
