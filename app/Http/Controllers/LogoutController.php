@@ -17,7 +17,6 @@ class LogoutController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
-        Log::info('user logged out');
+        return redirect()->route('Auth.login')->with('success logging you out');
     }
 }

@@ -1,4 +1,4 @@
-<div class="lg:fixed w-64 p-0 m-0 h-screen bg-white">
+<div class="lg:fixed w-64 p-0 m-0 h-screen bg-gray-100">
     <a href="{{ route('dashboard.index') }}" class="mt-3">
         <img class="block mt-4" src="/images/shope-high-resolution-logo-transparent.png" alt="logo" />
     </a>
