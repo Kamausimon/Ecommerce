@@ -2,21 +2,32 @@
 <html>
 @include('partials._head') <!-- Ensure Tailwind CSS is linked here -->
 
-<body class="bg-gray-100">
+<body class="bg-white">
     @include('partials._nav')
 
-    <div class="container mx-auto px-4 py-8">
-        <div class="max-w-xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-            <div class="px-4 py-5">
-                <h2 class="text-2xl font-semibold text-gray-800">{{ $product->name }}</h2>
-                @if($product->image_path)
-                <img src="{{ asset('storage/'. $product->image_path) }}" alt="{{ $product->name }}" class="mt-4 w-full h-64 object-cover">
-                @endif
-                <p class="mt-4 text-gray-600">{{ $product->description }}</p>
+    <div class="max-w-2xl  mx-auto  rounded-lg overflow-hidden flex">
+        @if($product->image_path)
+        <div class="flex-none ml-8 p-0">
+            <img src="{{ asset('storage/'. $product->image_path) }}" alt="{{ $product->name }}" class="h-80 object-cover">
+        </div>
+        @endif
+
+        <div class="flex-grow p-4 flex flex-col  justify-between mt-5">
+            <div>
+                <h2 class="text-xl font-semibold text-gray-800">{{ $product->name }}</h2>
+                <div class="py-2">
+                    <span class="text-gray-700">Price: </span>
+                    <span class="font-semibold">Ksh{{ number_format($product->price, 2) }}</span>
+                </div>
+
             </div>
-            <div class="px-4 py-4 bg-gray-50">
-                <span class="text-gray-700">Price: </span>
-                <span class="font-semibold">${{ number_format($product->price, 2) }}</span>
+            <span class="italic underline text-lg mt-3"> features</span>
+            <div class="text-gray-600 mt-4">
+                <ul class="list-disc pl-5">
+                    @foreach(explode(':', $product->description) as $item)
+                    <li>{{ trim($item) }}</li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>

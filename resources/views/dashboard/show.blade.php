@@ -41,8 +41,8 @@
                             <input type="hidden" name="product[name]" value="{{$product->name}}">
                             <input type="hidden" name="product[price]" value="{{$product->price}}">
                             <input type="hidden" name="product[image_path]" value="{{$product->image_path}}">
-                            <input type="number" name="quantity" value="1">
-                            <button type="submit" class="px-12 py-2 bg-blue-500 text-white rounded hover:bg-blue-800">Add To Cart</button>
+                            <input type="number" name="quantity" value="1" class="px-1 py-2 mt-1 mb-2 border border-sky-500">
+                            <button type="submit" class="px-14 py-2 bg-blue-500 text-white rounded hover:bg-blue-800">Add To Cart</button>
                         </form>
                     </div>
                     <span class="italic underline text-lg mt-3"> features</span>

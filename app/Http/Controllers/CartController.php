@@ -21,26 +21,35 @@ class cartController extends Controller
     public function add(Request $request)
     {
         $product = $request->input('product');
-        $quantity = $request->input('quantity');
+        $quantity = (int)$request->input('quantity'); // Ensure quantity is an integer
 
         $cart = $this->getCart($request);
 
+        // Check if the product already exists in the cart
         if (isset($cart[$product['id']])) {
-            $cart[$product['id']]['quantity'] += $quantity;
+            // Ensure that the current quantity is an integer before adding
+            $currentQuantity = is_array($cart[$product['id']]['quantity']) ? 0 : (int)$cart[$product['id']]['quantity'];
+            $cart[$product['id']]['quantity'] = $currentQuantity + $quantity;
         } else {
+            // Add the product to the cart
             $cart[$product['id']] = [
                 'name' => $product['name'],
-                'quantity' => ['quantity'],
+                'quantity' => $quantity,
                 'price' => $product['price'],
                 'image_path' => $product['image_path']
             ];
         }
 
+        // Save the updated cart back to the session
         $this->saveCart($request, $cart);
+
+        // Log the cart's current state for debugging
         Log::info('Added to cart:', $cart);
 
+        // Redirect back to the cart page with a success message
         return redirect()->route('cart.index')->with('success', 'Product added to the cart');
     }
+
     public function remove(Request $request, $id)
     {
         $cart = $request->session()->get('cart', []);
