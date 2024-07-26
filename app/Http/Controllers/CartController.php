@@ -15,9 +15,19 @@ class cartController extends Controller
         }
         $cart = $this->getCart($request);
 
+        //calculate total price
+        $totalPrice = 0;
+        foreach ($cart as $item) {
+            $totalPrice += $item['price'] * $item['quantity'];
+        }
+
+        $discount = $totalPrice * 0.05;
+
+        // Calculate subtotal after discount
+        $subtotal = $totalPrice - $discount;
 
         Log::info('Cart Contents:', $cart);
-        return view('cart.index', compact('cart'));
+        return view('cart.index', compact('cart', 'totalPrice', 'discount', 'subtotal'));
     }
 
     public function add(Request $request)

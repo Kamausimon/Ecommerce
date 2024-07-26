@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\LoginController;
+use APP\Http\Controllers\PaymentController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -71,3 +72,6 @@ Route::post('registerUser', [RegisterController::class, 'RegisterUser']);
 
 //logoutcontroller
 Route::post('/logoutUser', [LogoutController::class, 'destroy'])->name('Auth.logout')->middleware('auth');
+
+//paymentController
+Route::get('/payment', [PaymentController::class, 'index'])->name('payment.complete');

@@ -83,10 +83,10 @@
                             Total:
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Ksh{{ number_format($subtotal, 2) }}
+                            Ksh{{ number_format($totalPrice, 2) }}
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="border-none">
                         <td colspan="3" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-gray-900">
                             Discount:
                         </td>
@@ -94,15 +94,15 @@
                             Ksh{{ number_format($discount, 2) }}
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="border-none">
                         <td colspan="3" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-gray-900">
                             Subtotal:
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Ksh{{ number_format($total, 2) }}
+                            Ksh{{ number_format($subtotal, 2) }}
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="border-none">
                         <td colspan="4" class="px-6 py-4 whitespace-nowrap text-center">
                             <form action="{{ route('payment.complete') }}" method="POST">
                                 @csrf
