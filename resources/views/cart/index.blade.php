@@ -78,6 +78,40 @@
                         </td>
                     </tr>
                     @endforelse
+                    <tr>
+                        <td colspan="3" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-gray-900">
+                            Total:
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            Ksh{{ number_format($subtotal, 2) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-gray-900">
+                            Discount:
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            Ksh{{ number_format($discount, 2) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-gray-900">
+                            Subtotal:
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            Ksh{{ number_format($total, 2) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="px-6 py-4 whitespace-nowrap text-center">
+                            <form action="{{ route('payment.complete') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    Complete Payment
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

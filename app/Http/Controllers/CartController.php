@@ -14,6 +14,8 @@ class cartController extends Controller
             $request->session()->put('cart', []);
         }
         $cart = $this->getCart($request);
+
+
         Log::info('Cart Contents:', $cart);
         return view('cart.index', compact('cart'));
     }
