@@ -17,8 +17,8 @@
 
         <div class="w-auto h-5/6 p-4 mt-2 ">
             <a href="{{route('dashboard.index')}}" class="ml-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 48 48">
-                    <path fill="#2f88ff" fill-rule="evenodd" stroke="#000" stroke-linejoin="round" stroke-width="4" d="M44 40.8361C39.1069 34.8632 34.7617 31.4739 30.9644 30.6682C27.1671 29.8625 23.5517 29.7408 20.1182 30.303V41L4 23.5453L20.1182 7V17.167C26.4667 17.2172 31.8638 19.4948 36.3095 24C40.7553 28.5052 43.3187 34.1172 44 40.8361Z" clip-rule="evenodd" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 16 16">
+                    <path fill="grey" fill-rule="evenodd" d="m2.87 7.75l1.97 1.97a.75.75 0 1 1-1.06 1.06L.53 7.53L0 7l.53-.53l3.25-3.25a.75.75 0 0 1 1.06 1.06L2.87 6.25h9.88a3.25 3.25 0 0 1 0 6.5h-2a.75.75 0 0 1 0-1.5h2a1.75 1.75 0 1 0 0-3.5z" clip-rule="evenodd" />
                 </svg>
             </a>
             <div class="max-w-2xl  mx-auto  rounded-lg overflow-hidden flex">

@@ -25,8 +25,12 @@ class DashboardController extends Controller
         $product = Product::findOrFail($id);
         Log::info("product retrieved");
 
-        return view('dashboard.show', ['product' => $product]);
+
+
+        return view('dashboard.show', compact('product',));
     }
+
+
 
 
     public function search(Request $request)
@@ -48,6 +52,8 @@ class DashboardController extends Controller
         // Get the query log
         $queryLog = DB::getQueryLog();
         Log::info("SQL Query Log: ", $queryLog);
+
+
 
         // Return the view with the products
         return view('dashboard.index', ['products' => $products]);

@@ -9,6 +9,11 @@
 
     <!-- data div -->
     <div class="flex flex-col items-center mt-40">
+        <a href="{{route('dashboard.index')}}" class="ml-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 16 16">
+                <path fill="grey" fill-rule="evenodd" d="m2.87 7.75l1.97 1.97a.75.75 0 1 1-1.06 1.06L.53 7.53L0 7l.53-.53l3.25-3.25a.75.75 0 0 1 1.06 1.06L2.87 6.25h9.88a3.25 3.25 0 0 1 0 6.5h-2a.75.75 0 0 1 0-1.5h2a1.75 1.75 0 1 0 0-3.5z" clip-rule="evenodd" />
+            </svg>
+        </a>
         <div class="w-full max-w-4xl">
             <table class="min-w-full divide-y divide-gray-200 shadow overflow-hidden rounded-lg">
                 <thead class="bg-gray-50">
@@ -28,7 +33,8 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    @forelse($cart as $item)
+                    @forelse($cart as $id => $item)
+
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
@@ -46,20 +52,21 @@
                             Ksh{{ number_format($item['price'], 2) }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            <button onclick="changeQuantity('decrease',  {{ $item['id'] }})">-</button>
-                            <span id="quantity-{{ $item['id'] }}">{{ $item['quantity'] }}</span>
-                            <button onclick="changeQuantity('increase', {{ $item['id'] }})">+</button>
+                            {{ $item['quantity'] }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Ksh<span id="total-{{ $item['id'] }}">{{ number_format($item['price'] * $item['quantity'], 2) }}</span>
+                            Ksh{{ number_format($item['price'] * $item['quantity'], 2) }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            <form action="{{route('cart.remove')}}" method="POST">
+                            <form action="{{route('cart.remove', $id)}}" method="POST">
                                 @csrf
                                 @METHOD('DELETE')
-                                <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
-                                    <path fill="grey" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2zM18 4h-2.5l-.71-.71c-.18-.18-.44-.29-.7-.29H9.91c-.26 0-.52.11-.7.29L8.5 4H6c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1" />
-                                </svg>
+                                <button type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                                        <path fill="grey" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2zM18 4h-2.5l-.71-.71c-.18-.18-.44-.29-.7-.29H9.91c-.26 0-.52.11-.7.29L8.5 4H6c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1" />
+                                    </svg>
+                                </button>
+
                             </form>
 
                         </td>
@@ -78,33 +85,7 @@
 
     @include('partials._footer')
     <script>
-        function changeQuantity(action, itemId) {
-            let quantityElement = document.getElementById(`quantity-${itemId}`);
-            let quantity = parseInt(quantityElement.innerText);
-            if (action === 'increase') {
-                quantity += 1;
-            } else if (action === 'decrease' && quantity > 1) {
-                quantity -= 1;
-            }
-            quantityElement.innerText = quantity;
-            updateQuantityInDatabase(itemId, quantity);
-            updateTotalPrice(itemId, quantity);
-        }
 
-        function deleteItem(itemId) {
-            // Send request to server to delete item
-            // On success, remove the item row from the table
-            document.querySelector(`#row-${itemId}`).remove();
-        }
-
-        function updateQuantityInDatabase(itemId, quantity) {
-            // Use fetch API or XMLHttpRequest to send the updated quantity to the server
-        }
-
-        function updateTotalPrice(itemId, quantity) {
-            let pricePerItem = /* Price per item fetched from the server or stored in a data attribute */
-                document.getElementById(`total-${itemId}`).innerText = (pricePerItem * quantity).toFixed(2);
-        }
     </script>
 </body>
 
