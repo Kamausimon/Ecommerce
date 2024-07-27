@@ -154,6 +154,7 @@ return [
         /*
      * Package Service Providers...
      */
+        srmklive\paypal\Providers\PayPalServiceProvider::class,
 
         /*
      * Application Service Providers...

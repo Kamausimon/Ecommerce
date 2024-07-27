@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\LoginController;
 use APP\Http\Controllers\PaymentController;
+use App\Http\Controllers\PaypalController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -74,4 +75,9 @@ Route::post('registerUser', [RegisterController::class, 'RegisterUser']);
 Route::post('/logoutUser', [LogoutController::class, 'destroy'])->name('Auth.logout')->middleware('auth');
 
 //paymentController
-Route::get('/payment', [PaymentController::class, 'index'])->name('payment.complete');
+Route::get('/payment', [PaymentController::class, 'index'])->name('payment.checkout');
+
+//paypalcontroller
+Route::get('/handlePayment', [PaypalController::class, 'handlePayment'])->name('Paypal.handlePayment');
+Route::get('/cancelPayment', [PaypalController::class, 'cancelPayment'])->name('Paypal.cancelPayment');
+Route::get('/paymentSuccess', [PaypalController::class, 'paymentSuccess'])->name('Paypal.paymentSuccess');
