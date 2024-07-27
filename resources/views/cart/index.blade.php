@@ -80,10 +80,10 @@
                     @endforelse
                     <tr>
                         <td colspan="3" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-gray-900">
-                            Total:
+                            Subtotal:
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Ksh{{ number_format($totalPrice, 2) }}
+                            Ksh{{ number_format($subtotal, 2) }}
                         </td>
                     </tr>
                     <tr class="border-none">
@@ -96,10 +96,10 @@
                     </tr>
                     <tr class="border-none">
                         <td colspan="3" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-gray-900">
-                            Subtotal:
+                            Total:
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            Ksh{{ number_format($subtotal, 2) }}
+                            Ksh{{ number_format($totalPrice, 2) }}
                         </td>
                     </tr>
                     <tr class="border-none">
