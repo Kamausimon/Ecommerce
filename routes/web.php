@@ -78,6 +78,7 @@ Route::post('/logoutUser', [LogoutController::class, 'destroy'])->name('Auth.log
 Route::get('/payment', [PaymentController::class, 'index'])->name('payment.checkout');
 
 //paypalcontroller
-Route::get('/handlePayment', [PaypalController::class, 'handlePayment'])->name('Paypal.handlePayment');
-Route::get('/cancelPayment', [PaypalController::class, 'cancelPayment'])->name('Paypal.cancelPayment');
-Route::get('/paymentSuccess', [PaypalController::class, 'paymentSuccess'])->name('Paypal.paymentSuccess');
+Route::get('/create-transaction', [PaypalController::class, 'createTransaction'])->name('createTransaction');
+Route::get('/process-transaction', [PaypalController::class, 'processTransaction'])->name('processTransaction');
+Route::get('/success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('/cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
