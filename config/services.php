@@ -34,5 +34,12 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'mpesa' => [
+        'consumer_key' => env('MPESA_CONSUMER_KEY'),
+        'consumer_secret' => env('MPESA_CONSUMER_SECRET'),
+        'environment' => env('MPESA_ENV', 'sandbox'), // Default to sandbox
+        'business_shortcode' => env('MPESA_BUSINESS_SHORTCODE', '174379'), // Your business short code
+        'callback_url' => env('MPESA_CALLBACK_URL'),
+    ],
 
 ];

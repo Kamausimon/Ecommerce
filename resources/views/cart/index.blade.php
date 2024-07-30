@@ -104,7 +104,7 @@
                     </tr>
                     <tr class="border-none">
                         <td colspan="4" class="px-6 py-4 whitespace-nowrap text-center">
-                            <form action="{{ route('payment.checkout') }}" method="GET">
+                            <form action="{{ route('mpesa.form') }}" method="GET">
                                 @csrf
                                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     Checkout

@@ -85,4 +85,6 @@ Route::get('/success-transaction', [PaypalController::class, 'successTransaction
 Route::get('/cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
 //mpesacontroller
-Route::post('/mpesa/callback', [MpesaController::class, 'handleCallback']);
+Route::get('/mpesa/payment', [MpesaController::class, 'showPaymentForm'])->name('mpesa.form');
+Route::post('/mpesa/payment', [MpesaController::class, 'initiatePayment'])->name('mpesa.payment');
+Route::post('/mpesa/callback', [MpesaController::class, 'handleCallback'])->name('mpesa.callback');
