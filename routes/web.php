@@ -7,6 +7,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\LoginController;
 use APP\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaypalController;
+use App\Http\Controllers\MpesaController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -82,3 +83,6 @@ Route::get('/create-transaction', [PaypalController::class, 'createTransaction']
 Route::get('/process-transaction', [PaypalController::class, 'processTransaction'])->name('processTransaction');
 Route::get('/success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 Route::get('/cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
+
+//mpesacontroller
+Route::post('/mpesa/callback', [MpesaController::class, 'handleCallback']);
