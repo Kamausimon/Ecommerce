@@ -16,6 +16,11 @@ class MpesaController extends Controller
         $this->mpesaService = $mpesaService;
     }
 
+    public function showPaymentForm()
+    {
+        return view('mpesa.payment');
+    }
+
     public function initiatePayment(Request $request)
     {
         $request->validate([
