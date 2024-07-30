@@ -18,18 +18,18 @@ class MpesaController extends Controller
 
     public function showPaymentForm()
     {
-        return view('mpesa.payment');
+        $cartTotal = session('cartTotal', 0);
+        return view('mpesa.form', compact('cartTotal'));
     }
 
     public function initiatePayment(Request $request)
     {
         $request->validate([
             "phone" => 'required|string',
-            'amount' => 'required|numeric|min:1',
         ]);
 
         $phoneNumber = $request->input('phone');
-        $amount = $request->input('amount');
+        $amount = session('cartTotal', 0);
         $accountReference = 'TestPayment';
         $transactionDesc = 'Payment for order';
 

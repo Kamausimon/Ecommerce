@@ -9,10 +9,22 @@
 
     <!-- data div -->
     <div class="flex flex-col items-center mt-40">
-        <a href="{{route('dashboard.index')}}" class="ml-4 mb-5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
-                <path fill="grey" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z" />
-            </svg>
+
+        <div class="flex w-full justify-between items-center">
+            <button onclick="history.back()" class="mb-5 ml-8 bg-white text-white font-bold py-2 px-4 rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 16 16">
+                    <path fill="black" fill-rule="evenodd" d="m2.87 7.75l1.97 1.97a.75.75 0 1 1-1.06 1.06L.53 7.53L0 7l.53-.53l3.25-3.25a.75.75 0 0 1 1.06 1.06L2.87 6.25h9.88a3.25 3.25 0 0 1 0 6.5h-2a.75.75 0 0 1 0-1.5h2a1.75 1.75 0 1 0 0-3.5z" clip-rule="evenodd" />
+                </svg>
+            </button>
+            <div class="flex-grow text-center">
+                <a href="{{route('dashboard.index')}}" class="ml-4 mb-5 inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                        <path fill="grey" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
         </a>
         <div class="w-full max-w-4xl">
             <table class="min-w-full divide-y divide-gray-200 shadow overflow-hidden rounded-lg">
@@ -104,7 +116,7 @@
                     </tr>
                     <tr class="border-none">
                         <td colspan="4" class="px-6 py-4 whitespace-nowrap text-center">
-                            <form action="{{ route('mpesa.form') }}" method="GET">
+                            <form action="{{ route('redirect.payment') }}" method="GET">
                                 @csrf
                                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     Checkout

@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/cart/remove/{id}', [cartController::class, 'remove'])->name('cart.remove');
     Route::post('/cart/update/{id}', [cartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/clear', [cartController::class, 'clear'])->name('cart.clear');
+    Route::get('/redirectToPay', [cartController::class, 'proceedToPayment'])->name('redirect.payment');
 });
 
 
@@ -85,6 +86,8 @@ Route::get('/success-transaction', [PaypalController::class, 'successTransaction
 Route::get('/cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
 
 //mpesacontroller
-Route::get('/mpesa/payment', [MpesaController::class, 'showPaymentForm'])->name('mpesa.form');
-Route::post('/mpesa/payment', [MpesaController::class, 'initiatePayment'])->name('mpesa.payment');
-Route::post('/mpesa/callback', [MpesaController::class, 'handleCallback'])->name('mpesa.callback');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/mpesa/payment', [MpesaController::class, 'showPaymentForm'])->name('mpesa.form');
+    Route::post('/mpesa/payment', [MpesaController::class, 'initiatePayment'])->name('mpesa.payment');
+    Route::post('/mpesa/callback', [MpesaController::class, 'handleCallback'])->name('mpesa.callback');
+});

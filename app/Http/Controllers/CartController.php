@@ -30,6 +30,18 @@ class cartController extends Controller
         return view('cart.index', compact('cart', 'totalPrice', 'discount', 'subtotal'));
     }
 
+    public function proceedToPayment()
+    {
+        $cartTotal = $this->getCartTotal();
+        session(['cartTotal' => $cartTotal]);
+
+        Log::info('total acquired successfully' . $cartTotal);
+
+        return redirect()->route('mpesa.form');
+    }
+
+
+
     public function add(Request $request)
     {
         $product = $request->input('product');
@@ -110,5 +122,16 @@ class cartController extends Controller
     private function saveCart(Request $request, $cart)
     {
         return $request->session()->put('cart', $cart);
+    }
+    private function  getCartTotal()
+    {
+        $cart = session('cart', []);
+
+        //calculate total price
+        $totalPrice = 0;
+        foreach ($cart as $item) {
+            $totalPrice += $item['price'] * $item['quantity'];
+        }
+        return $totalPrice;
     }
 }
