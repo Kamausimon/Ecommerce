@@ -40,11 +40,14 @@ class MpesaController extends Controller
                 $accountReference,
                 $transactionDesc
             );
+            Log::info('response acquired');
 
             if (isset($response['ResponseCode']) && $response['ResponseCode'] === '0') {
+                Log::info('payment initiated successfully');
                 return response()->json(['success' => true, 'message' => 'Payment initiated successfully.']);
             }
 
+            Log::error('failed to initiate payment');
             return response()->json(['success' => false, 'message' => $response['errorMessage'] ?? 'Failed to initiate payment.']);
         } catch (\Exception $e) {
             Log::error('Payment initiation error: ' . $e->getMessage());

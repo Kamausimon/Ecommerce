@@ -27,7 +27,7 @@ class MpesaService
             $BusinessShortCode,
             $password,
             $Timestamp,
-            'CustomerBuyGoodsOnline',
+            'CustomerPayBillOnline',
             $amount,
             $phoneNumber,
             $BusinessShortCode,
