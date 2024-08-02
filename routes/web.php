@@ -44,7 +44,7 @@ Route::get('/createProduct', [ProductController::class, 'create'])->name('Produc
 Route::post('/storeProduct', [ProductController::class, 'store'])->name('Products.store'); //stores the product
 Route::get('/editProduct/{id}/edit', [ProductController::class, 'edit'])->name('Products.edit'); //displays the form to edit a product
 Route::post('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update'); //updates the product
-Route::post('/deleteProduct/{id}', [ProductController::class, 'delete'])->name('Products.delete'); //deletes the product
+Route::delete('/deleteProduct/{id}', [ProductController::class, 'destroy'])->name('Products.delete'); //deletes the product
 Route::get('/products/subcategory/{subcategoryId}', [ProductController::class, 'showProductsBySubcategory']); //displays products by subcategory
 
 

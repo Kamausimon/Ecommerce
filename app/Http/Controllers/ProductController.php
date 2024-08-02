@@ -148,7 +148,7 @@ class ProductController extends Controller
         if (!$product) {
             abort(404);
         }
-        return view('Products.edit');
+        return view('Products.edit', compact('product'));
     }
 
     /**
