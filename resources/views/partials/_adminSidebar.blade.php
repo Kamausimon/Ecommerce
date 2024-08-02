@@ -5,7 +5,7 @@
     </a>
 
     <!-- Navigation Section -->
-    <div class="relative  flex flex-col space-y-8">
+    <div class="relative mt-24 flex flex-col space-y-12 mb-12">
         <button class="text-grey hover:bg-gray-200 px-4 py-2 rounded-md focus:outline-none" id="productsDropdownButton">
             Products
         </button>
@@ -28,7 +28,7 @@
     </div>
 
     <!-- Logout Form Section -->
-    <form action="{{ route('Auth.logout') }}" method="POST" class="px-4 py-2 mx-11 mb-14">
+    <form action="{{ route('Auth.logout') }}" method="POST" class="px-4 py-2 mx-11 mb-12">
         @csrf
         <div class="flex space-x-1 items-center">
             <span class="ml-2">Logout</span>
