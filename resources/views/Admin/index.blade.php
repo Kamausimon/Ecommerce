@@ -5,7 +5,7 @@
 <body>
     @include('partials._adminSidebar')
 
-
+    <!-- data div -->
 
     @include('partials._footer')
 </body>
