@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use APP\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\MpesaController;
+use App\Http\Middleware\EnsureUserIsAdmin;
 
 use Illuminate\Support\Facades\Route;
 

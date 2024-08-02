@@ -21,6 +21,6 @@ class EnsureUserIsAdmin
         }
 
         //return response
-        return redirect('/')->with('error', 'you do not have admin access');
+        return redirect('/login')->with('error', 'you do not have admin access');
     }
 }
