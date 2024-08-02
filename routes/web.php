@@ -39,14 +39,17 @@ Route::middleware(['auth'])->group(function () {
 
 
 //product controller
-Route::get('/productsIndex', [ProductController::class, 'index'])->name('Products.index');
-Route::get('/createProduct', [ProductController::class, 'create'])->name('Products.create'); //displays the form to create a product
-Route::post('/storeProduct', [ProductController::class, 'store'])->name('Products.store'); //stores the product
-Route::get('/editProduct/{id}/edit', [ProductController::class, 'edit'])->name('Products.edit'); //displays the form to edit a product
-Route::post('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update'); //updates the product
-Route::delete('/deleteProduct/{id}', [ProductController::class, 'destroy'])->name('Products.delete'); //deletes the product
-Route::get('/products/subcategory/{subcategoryId}', [ProductController::class, 'showProductsBySubcategory']); //displays products by subcategory
+Route::middleware(['auth', 'EnsureUserIsAdmin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
+    Route::get('/productsIndex', [ProductController::class, 'index'])->name('Products.index');
+    Route::get('/createProduct', [ProductController::class, 'create'])->name('Products.create'); //displays the form to create a product
+    Route::post('/storeProduct', [ProductController::class, 'store'])->name('Products.store'); //stores the product
+    Route::get('/editProduct/{id}/edit', [ProductController::class, 'edit'])->name('Products.edit'); //displays the form to edit a product
+    Route::post('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update'); //updates the product
+    Route::delete('/deleteProduct/{id}', [ProductController::class, 'destroy'])->name('Products.delete'); //deletes the product
+    Route::get('/products/subcategory/{subcategoryId}', [ProductController::class, 'showProductsBySubcategory']); //displays products by subcategory
+});
 
 
 //cart controller
@@ -94,4 +97,3 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //admincontroller
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
