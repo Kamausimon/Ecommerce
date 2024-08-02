@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -38,14 +39,14 @@ Route::middleware(['auth'])->group(function () {
 
 
 //product controller
-Route::middleware(['auth'])->group(function () {
-    Route::get('/createProduct', [ProductController::class, 'create'])->name('Products.create'); //displays the form to create a product
-    Route::post('/storeProduct', [ProductController::class, 'store'])->name('Products.store'); //stores the product
-    Route::get('/editProduct/{id}/edit', [ProductController::class, 'edit'])->name('Products.edit'); //displays the form to edit a product
-    Route::post('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update'); //updates the product
-    Route::post('/deleteProduct/{id}', [ProductController::class, 'delete'])->name('Products.delete'); //deletes the product
-    Route::get('/products/subcategory/{subcategoryId}', [ProductController::class, 'showProductsBySubcategory']); //displays products by subcategory
-});
+Route::get('/productsIndex', [ProductController::class, 'index'])->name('Products.index');
+Route::get('/createProduct', [ProductController::class, 'create'])->name('Products.create'); //displays the form to create a product
+Route::post('/storeProduct', [ProductController::class, 'store'])->name('Products.store'); //stores the product
+Route::get('/editProduct/{id}/edit', [ProductController::class, 'edit'])->name('Products.edit'); //displays the form to edit a product
+Route::post('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update'); //updates the product
+Route::post('/deleteProduct/{id}', [ProductController::class, 'delete'])->name('Products.delete'); //deletes the product
+Route::get('/products/subcategory/{subcategoryId}', [ProductController::class, 'showProductsBySubcategory']); //displays products by subcategory
+
 
 
 //cart controller
@@ -91,3 +92,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/mpesa/payment', [MpesaController::class, 'initiatePayment'])->name('mpesa.payment');
     Route::post('/mpesa/callback', [MpesaController::class, 'handleCallback'])->name('mpesa.callback');
 });
+
+//admincontroller
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
