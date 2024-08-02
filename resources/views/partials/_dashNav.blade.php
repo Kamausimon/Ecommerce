@@ -9,6 +9,14 @@
 
     <div>
         <div class="flex gap-x-10">
+            @if(Auth::check() && Auth::user()->role === 'admin')
+            <div class="flex items-center justify-center  hover:bg-gray-100 text-white">
+                <a href="{{ route('admin.dashboard') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
+                    Admin Dashboard
+                </a>
+            </div>
+            @endif
+
             <a href="{{route('cart.index')}}" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 text-white ">
                 <span class="mr-1">Cart:</span>
                 <div class="w-10 h-10 rounded-full flex justify-center items-center">
