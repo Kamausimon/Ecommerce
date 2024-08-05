@@ -40,10 +40,12 @@ Route::middleware(['auth'])->group(function () {
 
 
 //product controller
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'EnsureUserIsAdmin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/logoutAdmin', [AdminController::class, 'destroy'])->name('Admin.logout');
     Route::get('/createProduct', [ProductController::class, 'create'])->name('Products.create'); //displays the form to create a product
     Route::post('/storeProduct', [ProductController::class, 'store'])->name('Products.store'); //stores the product
+    Route::get('/showProduct/{id}', [ProductController::class, 'show'])->name('Products.show'); //show a single product
     Route::get('/editProduct/{id}/edit', [ProductController::class, 'edit'])->name('Products.edit'); //displays the form to edit a product
     Route::post('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update'); //updates the product
     Route::delete('/deleteProduct/{id}', [ProductController::class, 'destroy'])->name('Products.delete'); //deletes the product
@@ -58,6 +60,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart/update/{id}', [cartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/clear', [cartController::class, 'clear'])->name('cart.clear');
     Route::get('/redirectToPay', [cartController::class, 'proceedToPayment'])->name('redirect.payment');
+});
+
+//logoutcontroller
+Route::post('/logoutUser', [LogoutController::class, 'destroy'])->name('Auth.logout')->middleware('auth');
+
+//mpesacontroller
+Route::middleware(['auth'])->group(function () {
+    Route::get('/mpesa/payment', [MpesaController::class, 'showPaymentForm'])->name('mpesa.form');
+    Route::post('/mpesa/payment', [MpesaController::class, 'initiatePayment'])->name('mpesa.payment');
+    Route::post('/mpesa/callback', [MpesaController::class, 'handleCallback'])->name('mpesa.callback');
 });
 
 
@@ -75,8 +87,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('Auth.loginUser')
 Route::get('/register', [RegisterController::class, 'Register'])->name('Auth.register');
 Route::post('registerUser', [RegisterController::class, 'RegisterUser']);
 
-//logoutcontroller
-Route::post('/logoutUser', [LogoutController::class, 'destroy'])->name('Auth.logout')->middleware('auth');
+
 
 //paymentController
 Route::get('/payment', [PaymentController::class, 'index'])->name('payment.checkout');
@@ -86,10 +97,3 @@ Route::get('/create-transaction', [PaypalController::class, 'createTransaction']
 Route::get('/process-transaction', [PaypalController::class, 'processTransaction'])->name('processTransaction');
 Route::get('/success-transaction', [PaypalController::class, 'successTransaction'])->name('successTransaction');
 Route::get('/cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
-
-//mpesacontroller
-Route::middleware(['auth'])->group(function () {
-    Route::get('/mpesa/payment', [MpesaController::class, 'showPaymentForm'])->name('mpesa.form');
-    Route::post('/mpesa/payment', [MpesaController::class, 'initiatePayment'])->name('mpesa.payment');
-    Route::post('/mpesa/callback', [MpesaController::class, 'handleCallback'])->name('mpesa.callback');
-});

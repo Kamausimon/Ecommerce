@@ -13,24 +13,18 @@ class EnsureUserIsAdmin
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return \Symfony\Component\HttpFoundation\Response
+    
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
         // Debug log to check authentication status
-        Log::info('Auth check: ' . (Auth::check() ? 'Authenticated' : 'Guest'));
-
-        // Check if the user is authenticated and has the 'admin' role
-        if (Auth::check() && Auth::user()->role === "admin") {
-            return $next($request);
+        if (Auth::user()->role !== 'admin') {
+            // Redirect to a different page if not an admin
+            Log::info('not admin');
+            return redirect()->route('dashboard.index')->with('error', 'You do not have admin access.');
         }
 
-        // Log the unauthorized access attempt
-        Log::info('Unauthorized access attempt by user: ' . (Auth::check() ? Auth::user()->id : 'guest'));
-
-        // Redirect to the login page if not authenticated
-        return redirect()->route("Auth.login")->with('error', 'You need to log in to access this page.');
+        // Proceed to the next middleware or request
+        return $next($request);
     }
 }

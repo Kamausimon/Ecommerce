@@ -124,7 +124,7 @@ class ProductController extends Controller
 
 
             //Redirect the user to see the created product
-            return redirect()->route('dashboard.show', ['id' => $product->id])
+            return redirect()->route('Products.show', ['id' => $product->id])
                 ->with('success', 'Product created successfully');
         } catch (\Exception $e) {
             // Rollback the transaction
@@ -133,6 +133,17 @@ class ProductController extends Controller
             Log::error('Error creating the product: ' . $e->getMessage());
             return redirect()->back()->withErrors(['error' => 'Failed to create product. Try again.']);
         }
+    }
+
+
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+        Log::info("product retrieved");
+
+
+
+        return view('Products.show', compact('product',));
     }
 
 
@@ -170,7 +181,7 @@ class ProductController extends Controller
             $product->update($validatedData);
 
             // Optionally, redirect to a page (e.g., product details) with a success message
-            return redirect()->route('products.show', $product->id)->with('success', 'Product updated successfully.');
+            return redirect()->route('Products.show', $product->id)->with('success', 'Product updated successfully.');
         } catch (\Exception $e) {
             // Log the error and redirect back with an error message
             Log::error('Error updating product: ' . $e->getMessage());
@@ -187,17 +198,10 @@ class ProductController extends Controller
         try {
             $product = Product::findOrFail($id);
             $product->delete();
-            return redirect()->route('dashboard.index')->with('success', 'Product deleted successfully');
+            return redirect()->route('admin.index')->with('success', 'Product deleted successfully');
         } catch (\Exception $e) {
             Log::error('error deleting the product' . $e->getMessage());
             return back()->withErrors(['error' => 'failed to delete product'])->withInput();
         }
-    }
-
-    public function showCategories()
-    {
-        $categories = ProductCategory::WhereNull('parent_id')->with('subCategories')->get();
-
-        return view('categories.index', compact('categories'));
     }
 }

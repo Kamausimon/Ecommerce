@@ -28,7 +28,7 @@
     </div>
 
     <!-- Logout Form Section -->
-    <form action="{{ route('Auth.logout') }}" method="POST" class="px-4 py-2 mx-11 mb-12">
+    <form action="{{ route('Admin.logout') }}" method="POST" class="px-4 py-2 mx-11 mb-12">
         @csrf
         <div class="flex space-x-1 items-center">
             <button class="ml-2 focus:outline-none">Logout</button>
