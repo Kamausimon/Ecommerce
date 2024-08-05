@@ -9,7 +9,7 @@ use App\Http\Controllers\LoginController;
 use APP\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\MpesaController;
-use App\Http\Middleware\EnsureUserIsAdmin;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 //product controller
-Route::middleware(['auth', 'EnsureUserIsAdmin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/createProduct', [ProductController::class, 'create'])->name('Products.create'); //displays the form to create a product
     Route::post('/storeProduct', [ProductController::class, 'store'])->name('Products.store'); //stores the product
