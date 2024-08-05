@@ -49,7 +49,6 @@ Route::middleware(['auth', 'EnsureUserIsAdmin'])->group(function () {
     Route::get('/editProduct/{id}/edit', [ProductController::class, 'edit'])->name('Products.edit'); //displays the form to edit a product
     Route::post('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update'); //updates the product
     Route::delete('/deleteProduct/{id}', [ProductController::class, 'destroy'])->name('Products.delete'); //deletes the product
-    Route::get('/products/subcategory/{subcategoryId}', [ProductController::class, 'showProductsBySubcategory']); //displays products by subcategory
 });
 
 
@@ -96,5 +95,3 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/mpesa/payment', [MpesaController::class, 'initiatePayment'])->name('mpesa.payment');
     Route::post('/mpesa/callback', [MpesaController::class, 'handleCallback'])->name('mpesa.callback');
 });
-
-//admincontroller
