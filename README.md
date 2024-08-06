@@ -1,12 +1,12 @@
-## Laravel eCommerce Application
+# Laravel eCommerce Application
 
 
 
 
-## Table of Contents
-Introduction
-Features
-Requirements
+### Table of Contents
+Introduction <br>
+Features <br>
+Requirements <br>
 Installation
 Configuration
 Usage
@@ -14,7 +14,7 @@ Contributing
 License
 Contact
 
-## Introduction
+### Introduction
 Welcome to the Laravel eCommerce Application! This project is a fully-featured eCommerce platform built using the powerful Laravel framework. It aims to provide a seamless shopping experience with an easy-to-use interface for both customers and administrators.
 
 Whether you are looking to start your own online store or want to learn more about eCommerce application development, this project serves as an excellent starting point.
