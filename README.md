@@ -7,79 +7,79 @@
 Introduction <br>
 Features <br>
 Requirements <br>
-Installation
-Configuration
-Usage
-Contributing
-License
-Contact
+Installation <br>
+Configuration <br>
+Usage <br>
+Contributing <br>
+License <br>
+Contact <br>
 
 ### Introduction
-Welcome to the Laravel eCommerce Application! This project is a fully-featured eCommerce platform built using the powerful Laravel framework. It aims to provide a seamless shopping experience with an easy-to-use interface for both customers and administrators.
+Welcome to the Laravel eCommerce Application! This project is a fully-featured eCommerce platform built using the powerful ** Laravel framework **. It aims to provide a seamless shopping experience with an easy-to-use interface for both customers and administrators.
 
 Whether you are looking to start your own online store or want to learn more about eCommerce application development, this project serves as an excellent starting point.
 
-Key Objectives:
-User-friendly: An intuitive interface for easy navigation and product discovery.
-Scalable: Built with scalability in mind to handle growing traffic and data.
-Secure: Implements best practices for security and data protection.
-Customizable: Easily extendable to fit specific business needs.
-Features
-Product Management:
+ ### Key Objectives:
+User-friendly: An intuitive interface for easy navigation and product discovery. <br>
+Scalable: Built with scalability in mind to handle growing traffic and data. <br>
+Secure: Implements best practices for security and data protection. <br>
+Customizable: Easily extendable to fit specific business needs. <br>
+ #### Features
+#### Product Management: 
 
-Add, update, and delete products.
-Categorize products and manage subcategories.
-Order Management:
+Add, update, and delete products. <br>
+Categorize products and manage subcategories. <br>
+#### Order Management:
 
-Cart system with order placement.
-Order tracking and management.
-Payment Integration:
+Cart system with order placement. <br>
+Order tracking and management. <br>
+#### Payment Integration:
 
 Integration with MPESA for secure payments.
-User Management:
+#### User Management:
 
-Authentication with role-based access.
-User profiles and order history.
-Responsive Design:
+Authentication with role-based access. <br>
+User profiles and order history. <br>
+#### Responsive Design:
 
-Mobile-friendly layout with tailwind.
-Admin Dashboard:
+Mobile-friendly layout with tailwind. <br>
+#### Admin Dashboard:
 
 Requirements
 Before you begin, ensure you have met the following requirements:
 
-PHP 8.0 or later
-Laravel 9.x
-Composer
-MySQL 5.7 or later
-Node.js & NPM
-Apache server
-Installation
+PHP 8.0 or later <br>
+Laravel 9.x <br>
+Composer <br>
+MySQL 5.7 or later <br>
+Node.js & NPM <br>
+Apache server <br>
+### Installation:
 Follow these steps to set up the project locally:
 
 Clone the repository:
 
-bash
-Copy code
-git clone https://github.com/kamausimon/Ecommerce.git
-cd laravel-ecommerce
-Install dependencies:
+bash <br>
+Copy code <br>
+git clone https://github.com/kamausimon/Ecommerce.git <br>
+cd laravel-ecommerce <br>
+Install dependencies: <br>
 
-bash
-Copy code
-composer install
-npm install
-npm run dev
-Copy .env.example to .env:
+bash <br>
+Copy code <br>
+composer install <br>
+npm install <br>
+npm run dev <br>
+Copy .env.example to .env: <br>
 
-bash
-Copy code
-cp .env.example .env
-Generate application key:
+bash <br>
+Copy code <br>
+cp .env.example .env <br>
+Generate application key: <br>
 
-bash
-Copy code
-php artisan key:generate
+bash <br>
+Copy code <br>
+php artisan key:generate <br>
 Set up the database:
 
 Create a MySQL database for the application.
