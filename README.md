@@ -1,4 +1,4 @@
-# Laravel eCommerce Application
+# Laravel Ecommerce Application
 
 
 
