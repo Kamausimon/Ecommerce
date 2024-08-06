@@ -15,7 +15,7 @@ class EnsureUserIsAdmin
      *
     
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
         // Debug log to check authentication status
         if (Auth::user()->role !== 'admin') {
