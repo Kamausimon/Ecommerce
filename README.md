@@ -1,66 +1,175 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Laravel eCommerce Application
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Table of Contents
+Introduction
+Features
+Requirements
+Installation
+Configuration
+Usage
+Contributing
+License
+Contact
+Introduction
+Welcome to the Laravel eCommerce Application! This project is a fully-featured eCommerce platform built using the powerful Laravel framework. It aims to provide a seamless shopping experience with an easy-to-use interface for both customers and administrators.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Whether you are looking to start your own online store or want to learn more about eCommerce application development, this project serves as an excellent starting point.
 
-## Learning Laravel
+Key Objectives:
+User-friendly: An intuitive interface for easy navigation and product discovery.
+Scalable: Built with scalability in mind to handle growing traffic and data.
+Secure: Implements best practices for security and data protection.
+Customizable: Easily extendable to fit specific business needs.
+Features
+Product Management:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Add, update, and delete products.
+Categorize products and manage subcategories.
+Order Management:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Cart system with order placement.
+Order tracking and management.
+Payment Integration:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Integration with MPESA for secure payments.
+User Management:
 
-## Laravel Sponsors
+Authentication with role-based access.
+User profiles and order history.
+Responsive Design:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Mobile-friendly layout with tailwind.
+Admin Dashboard:
 
-### Premium Partners
+Requirements
+Before you begin, ensure you have met the following requirements:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+PHP 8.0 or later
+Laravel 9.x
+Composer
+MySQL 5.7 or later
+Node.js & NPM
+Apache server
+Installation
+Follow these steps to set up the project locally:
 
-## Contributing
+Clone the repository:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+bash
+Copy code
+git clone https://github.com/kamausimon/Ecommerce.git
+cd laravel-ecommerce
+Install dependencies:
 
-## Code of Conduct
+bash
+Copy code
+composer install
+npm install
+npm run dev
+Copy .env.example to .env:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+bash
+Copy code
+cp .env.example .env
+Generate application key:
 
-## Security Vulnerabilities
+bash
+Copy code
+php artisan key:generate
+Set up the database:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Create a MySQL database for the application.
 
-## License
+Update the .env file with your database credentials.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+env
+Copy code
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+Run migrations and seed the database:
+
+bash
+Copy code
+php artisan migrate --seed
+Start the development server:
+
+bash
+Copy code
+php artisan serve
+Your application should now be running at http://localhost:8000.
+
+Configuration
+Payment Integration
+To integrate MPESA you need to configure the following settings in your .env file:
+
+env
+Copy code
+# MPESA Configuration
+MPESA_CONSUMER_KEY=your_mpesa_consumer_key
+MPESA_CONSUMER_SECRET=your_mpesa_consumer_secret
+
+
+Email Configuration
+Set up your email service provider to send notifications:
+
+env
+Copy code
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_mailtrap_username
+MAIL_PASSWORD=your_mailtrap_password
+MAIL_FROM_NAME="${APP_NAME}"
+Additional Configurations
+Caching: Configure caching for better performance.
+Logging: Customize log channels as needed.
+Usage
+User Roles
+The application supports multiple user roles:
+
+Admin: Full access to manage products, orders, and users.
+Customer: Can browse products, place orders, and manage their account.
+Common Commands
+Clear Cache:
+
+bash
+Copy code
+php artisan cache:clear
+
+bash
+Copy code
+php artisan queue:work
+Accessing the Admin Dashboard
+URL: /admin
+Default Admin Credentials: (you can set these in the seeder file)
+Email: admin@example.com
+Password: password
+Contributing
+We welcome contributions! Here's how you can help:
+
+Fork the repository.
+Create a new branch (git checkout -b feature/new-feature).
+Make your changes.
+Commit your changes (git commit -m 'Add new feature').
+Push to the branch (git push origin feature/new-feature).
+Open a pull request.
+Please ensure your code adheres to our coding standards and includes relevant tests.
+
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+Contact
+Feel free to reach out if you have any questions or suggestions:
+
+Email: kamausimon217@gmail.com
+Twitter: @kamau_codes
+
+
+
