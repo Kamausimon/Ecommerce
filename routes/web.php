@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 //product controller
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/logoutAdmin', [AdminController::class, 'destroy'])->name('Admin.logout');
     Route::get('/createProduct', [ProductController::class, 'create'])->name('Products.create'); //displays the form to create a product
