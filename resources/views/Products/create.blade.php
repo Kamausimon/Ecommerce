@@ -50,15 +50,6 @@
                             @enderror
                         </div>
 
-                        <!-- Stock Field -->
-                        <div>
-                            <label for="stock" class="block text-sm font-medium text-gray-700">Stock:</label>
-                            <input type="number" id="stock" name="stock" value="{{ old('stock') }}" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                            @error('stock')
-                            <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                            @enderror
-                        </div>
-
                         <!-- Category Field -->
                         <div>
                             <label for="category" class="block text-sm font-medium text-gray-700">Category:</label>

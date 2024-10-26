@@ -29,38 +29,18 @@
                     <!-- Category -->
                     <div class="mb-4">
                         <label for="category" class="block text-gray-700">Category:</label>
-                        <select id="category" name="category_id" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                            <option value="">Select a Category</option>
-                            @foreach ($categories as $category)
-                            <optgroup label="{{ $category->name }}">
-                                @if($category->subcategories->count() > 0)
-                                @foreach ($category->subcategories as $subcategory)
-                                <option value="{{ $subcategory->id }}"
-                                    {{ (old('category_id') == $subcategory->id || (isset($currentCategoryId) && $currentCategoryId == $subcategory->id)) ? 'selected' : '' }}>
-                                    {{ $subcategory->name }}
-                                </option>
-                                @endforeach
-                                @else
-                                <option value="{{ $category->id }}"
-                                    {{ (old('category_id') == $category->id || (isset($currentCategoryId) && $currentCategoryId == $category->id)) ? 'selected' : '' }}>
-                                    {{ $category->name }}
-                                </option>
-                                @endif
-                            </optgroup>
+                        <select name="category_id" id="category" class="w-full px-3 py-2 border rounded">
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
                             @endforeach
                         </select>
                     </div>
-
                     <!-- Price -->
                     <div class="mb-4">
                         <label for="price" class="block text-gray-700">Price:</label>
                         <input type="text" name="price" id="price" value="{{ $product->price }}" class="w-full px-3 py-2 border rounded">
-                    </div>
-
-                    <!-- Description -->
-                    <div class="mb-4">
-                        <label for="description" class="block text-gray-700">Description:</label>
-                        <textarea name="description" id="description" class="w-full px-3 py-2 border rounded">{{ $product->description }}</textarea>
                     </div>
                     <!-- Stock -->
                     <div class="mb-4">
