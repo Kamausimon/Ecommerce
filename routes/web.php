@@ -41,7 +41,7 @@ Route::middleware(['auth'])->group(function () {
 //product controller
 Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('Admin.index');
-    Route::get('/logoutAdmin', [AdminController::class, 'destroy'])->name('Admin.logout');
+    Route::post('/logoutAdmin', [AdminController::class, 'destroy'])->name('Admin.logout');
     Route::get('/createProduct', [ProductController::class, 'create'])->name('Products.create'); //displays the form to create a product
     Route::post('/storeProduct', [ProductController::class, 'store'])->name('Products.store'); //stores the product
     Route::get('/showProduct/{id}', [ProductController::class, 'show'])->name('Products.show'); //show a single product

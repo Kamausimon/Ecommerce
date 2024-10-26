@@ -25,6 +25,7 @@
         <a href="#" class="text-gray-700 hover:bg-gray-200 px-4 py-2 rounded-md">Customers</a>
         <a href="#" class="text-gray-700 hover:bg-gray-200 px-4 py-2 rounded-md">Analytics</a>
         <a href="#" class="text-gray-700 hover:bg-gray-200 px-4 py-2 rounded-md">Notifications</a>
+        <a href="{{route('dashboard.index')}}" class="text-gray-700 hover:bg-gray-200 px-4 py-2 rounded-md">Client Area</a>
     </div>
 
     <!-- Logout Form Section -->

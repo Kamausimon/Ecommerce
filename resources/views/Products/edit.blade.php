@@ -29,11 +29,18 @@
                     <!-- Category -->
                     <div class="mb-4">
                         <label for="category" class="block text-gray-700">Category:</label>
-                        <select name="category_id" id="category" class="w-full px-3 py-2 border rounded">
-                            @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
-                                {{ $category->name }}
-                            </option>
+                        <select id="category" name="category_id" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="">Select a Category</option>
+                            @foreach ($categories as $category)
+                            <optgroup label="{{ $category->name }}">
+                                @if($category->subcategories->count() > 0)
+                                @foreach ($category->subcategories as $subcategory)
+                                <option value="{{ $subcategory->id }}" {{ old('category_id') == $subcategory->id ? 'selected' : '' }}>{{ $subcategory->name }}</option>
+                                @endforeach
+                                @else
+                                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                @endif
+                            </optgroup>
                             @endforeach
                         </select>
                     </div>
