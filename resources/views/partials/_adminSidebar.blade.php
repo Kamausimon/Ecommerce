@@ -1,6 +1,6 @@
 <div class="lg:fixed w-64 p-0 m-0 h-screen bg-gray-100 flex flex-col justify-between">
     <!-- Logo Section -->
-    <a href="{{ route('admin.index') }}" class="mt-3">
+    <a href="{{ route('Admin.index') }}" class="mt-3">
         <img class="block mt-4" src="/images/shope-high-resolution-logo-transparent.png" alt="logo" />
     </a>
 
@@ -10,7 +10,7 @@
             Products
         </button>
         <div class="hidden absolute mt-2 w-48 bg-white rounded-md shadow-lg z-10" id="productsDropdownMenu">
-            <a href="{{ route('admin.index') }}" class="block px-4 py-2 text-grey hover:bg-gray-200">Products List</a>
+            <a href="{{ route('Admin.index') }}" class="block px-4 py-2 text-grey hover:bg-gray-200">Products List</a>
             <a href="{{ route('Products.create') }}" class="block px-4 py-2 text-grey hover:bg-gray-200">Create Product</a>
         </div>
         <button class="text-grey hover:bg-gray-200 px-4 py-2 rounded-md focus:outline-none">
