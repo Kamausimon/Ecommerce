@@ -35,28 +35,24 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-
-
-
-        // Validate the data including the image
+        // Validate the data including the stock
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required|max:1000',
             'price' => 'required|numeric|min:0',
-            'category_id' => 'required|exists:product_category,id'
+            'category_id' => 'required|exists:product_category,id',
+            'stock' => 'required|integer|min:0',
         ]);
 
         Log::info('Validation passed, proceeding to create product.', ['data' => $validatedData]);
-
 
         try {
             // Start a transaction
             DB::beginTransaction();
 
-            // Create the product
+            // Create the product instance
             $product = new Product;
-            $product->name = $validatedData['name'];
 
             // Handle inventory ID
             $inventoryId = $request->input('inventory_id');
@@ -67,11 +63,11 @@ class ProductController extends Controller
                 $inventory->status = 'in stock';
                 $inventory->save();
                 $inventoryId = $inventory->id;
-                Log::info('Inventory id created successfully: ' . $inventoryId, ['data' => $inventoryId]);
             }
+            Log::info('Inventory created successfully', ['id' => $inventoryId]);
 
-            //handle discount
-            $discountId = $request->input('dicount_id');
+            // Handle discount
+            $discountId = $request->input('discount_id');  // Corrected typo here
             if (!$discountId) {
                 $discount = new Discount();
                 $discount->discount_percentage = 0;
@@ -80,16 +76,14 @@ class ProductController extends Controller
                 $discount->status = 0;
                 $discount->save();
                 $discountId = $discount->id;
-                Log::info('Discount id created successfully: ' . $discountId, ['data' => $discountId]);
             }
+            Log::info('Discount created successfully', ['id' => $discountId]);
 
             // Generate a unique SKU
             do {
                 $sku = 'SKU-' . time() . '-' . rand(1000, 9999);
             } while (Product::where('SKU', $sku)->exists());
-
-            Log::info('SKU generated: ' . $sku, ['data' => $sku]);
-
+            Log::info('SKU generated successfully', ['sku' => $sku]);
 
             // Handle the image upload
             if ($request->hasFile('image')) {
@@ -102,17 +96,27 @@ class ProductController extends Controller
                 $product->image_path = str_replace('public/', '', $imagePath); // Save the path of the image
             }
 
-
-
-            Log::info('Inventory id created successfully: ' . $inventoryId, ['data' => $inventoryId]);
-
+            // Set other product attributes
             $product->name = $validatedData['name'];
             $product->description = $validatedData['description'];
             $product->SKU = $sku;
             $product->price = $validatedData['price'];
             $product->category_id = $validatedData['category_id'];
             $product->inventory_id = $inventoryId;
-            $product->discount_id = $validatedData['discount_id'] ?? null;
+            $product->discount_id = $discountId;
+            $product->stock = $validatedData['stock'];
+
+            // Log the product data before saving to confirm everything is set correctly
+            Log::info('Product attributes before saving:', [
+                'name' => $product->name,
+                'description' => $product->description,
+                'SKU' => $product->SKU,
+                'price' => $product->price,
+                'category_id' => $product->category_id,
+                'inventory_id' => $product->inventory_id,
+                'discount_id' => $product->discount_id,
+                'stock' => $product->stock
+            ]);
 
             // Save the product
             $product->save();
@@ -121,9 +125,7 @@ class ProductController extends Controller
             // Commit the transaction
             DB::commit();
 
-
-
-            //Redirect the user to see the created product
+            // Redirect the user to see the created product
             return redirect()->route('Products.show', ['id' => $product->id])
                 ->with('success', 'Product created successfully');
         } catch (\Exception $e) {
@@ -134,20 +136,6 @@ class ProductController extends Controller
             return redirect()->back()->withErrors(['error' => 'Failed to create product. Try again.']);
         }
     }
-
-
-    public function show($id)
-    {
-        $product = Product::findOrFail($id);
-        Log::info("product retrieved");
-
-
-
-        return view('Products.show', compact('product',));
-    }
-
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -165,25 +153,23 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-
     public function update(Request $request, string $id)
     {
+        // Validate the incoming data
         $validatedData = $request->validate([
             'name' => 'required',
             'image_path' => 'nullable|url',
             'description' => 'required|max:1000',
-            'stock' => 'required',
-            'price' => 'required',
-            'category_id' => 'required|exists:product_category,id'
+            'SKU' => 'required',
+            'price' => 'required'
         ]);
 
         Log::info('Validation passed, proceeding to update product.', ['data' => $validatedData]);
 
         try {
+            // Find the product
             $product = Product::findOrFail($id);
             $product->update($validatedData);
-
-            Log::info('Product updated successfully: ' . $product->id, ['data' => $product]);
 
             // Optionally, redirect to a page (e.g., product details) with a success message
             return redirect()->route('Products.show', $product->id)->with('success', 'Product updated successfully.');
@@ -193,6 +179,8 @@ class ProductController extends Controller
             return back()->withErrors(['error' => 'Failed to update product.'])->withInput();
         }
     }
+
+
 
     /**
      * Remove the specified resource from storage.
