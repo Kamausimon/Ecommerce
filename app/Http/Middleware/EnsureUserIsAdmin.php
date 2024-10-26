@@ -13,14 +13,19 @@ class EnsureUserIsAdmin
     /**
      * Handle an incoming request.
      *
-    
+
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Debug log to check authentication status
+        // Check if the user is authenticated
+        if (!Auth::check()) {
+            Log::info('User not authenticated');
+            return redirect()->route('login')->with('error', 'Please log in to access this page.');
+        }
+
+        // Check if the authenticated user is an admin
         if (Auth::user()->role !== 'admin') {
-            // Redirect to a different page if not an admin
-            Log::info('not admin');
+            Log::info('User is not an admin');
             return redirect()->route('dashboard.index')->with('error', 'You do not have admin access.');
         }
 

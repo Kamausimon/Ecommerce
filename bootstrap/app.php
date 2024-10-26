@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         //register a global middleware
         $middleware->append(\App\Http\Middleware\LogDatabaseConnection::class);
+        $middleware->alias(['is_admin' => \App\Http\Middleware\EnsureUserIsAdmin::class]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

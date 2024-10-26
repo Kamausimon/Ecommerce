@@ -1,43 +1,52 @@
 <!DOCTYPE html>
 <html>
-@include('partials._head');
+@include('partials._head')
 
 <body class="flex">
 
-
-    <!-- sidebar -->
+    <!-- Sidebar -->
     @include('partials._sideBar')
 
-    <!-- end of sidebar -->
+    <!-- Main Body -->
+    <div class="flex-1 flex flex-col min-h-screen">
 
-    <!-- main body -->
-    <div class="ml-64 w-full p-0 m-0 bg-slate-700 sticky top-0 z-50">
-
-        <!-- navbar -->
-        <div class="bg-slate-700 sticky top-0 z-50">
+        <!-- Navbar -->
+        <div class="bg-slate-700 sticky top-0 z-20">
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center p-4 lg:hidden">
+                <button id="menu-button" class="text-white focus:outline-none">
+                    <!-- Hamburger Icon -->
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <span class="ml-4 text-white text-lg">Dashboard</span>
+            </div>
             @include('partials._dashNav')
         </div>
 
-
-
-        <!-- end of navbar -->
-
-        <!-- data div -->
-        <div class="product-container bg-gray-300 font-sans h-screen">
-            @include('partials._cardComponent');
+        <!-- Data Div -->
+        <div class="flex-1 bg-gray-300 font-sans">
+            @include('partials._cardComponent')
         </div>
-        <!-- end of data div -->
+
+        <!-- Footer -->
+        <div class="bg-slate-700">
+            @include('partials._footer')
+        </div>
 
     </div>
-    <!-- end of main body -->
 
+    <!-- JavaScript for Toggling Sidebar -->
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const sidebar = document.getElementById('sidebar');
 
-    <!-- footer -->
-    <div class="bg-slate-700 sticky bottom-0 z-50">
-        @include('partials._footer')
-    </div>
-
-    <!-- end of footer -->
+        menuButton.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+    </script>
 </body>
 
 </html>

@@ -160,9 +160,8 @@ class ProductController extends Controller
             'name' => 'required',
             'image_path' => 'nullable|url',
             'description' => 'required|max:1000',
-            'stock' => 'required|integer',
-            'price' => 'required',
-            'category_id' => 'required|exists:product_category,id'
+            'SKU' => 'required',
+            'price' => 'required'
         ]);
 
         Log::info('Validation passed, proceeding to update product.', ['data' => $validatedData]);
@@ -170,27 +169,9 @@ class ProductController extends Controller
         try {
             // Find the product
             $product = Product::findOrFail($id);
+            $product->update($validatedData);
 
-            // Log current data
-            Log::info('Existing Product Data', ['product' => $product]);
-
-            // Update the product attributes
-            $product->name = $validatedData['name'];
-            $product->description = $validatedData['description'];
-            $product->stock = $validatedData['stock'];
-            $product->price = $validatedData['price'];
-            $product->category_id = $validatedData['category_id'];
-
-            // Preserve fields that are not in the validated data
-            $product->SKU = $product->SKU;  // SKU should remain unchanged
-            $product->inventory_id = $product->inventory_id;  // Inventory ID should remain unchanged
-            $product->discount_id = $product->discount_id;  // Discount ID should remain unchanged
-
-            // Save the updated product
-            $product->save();
-
-            Log::info('Product updated successfully: ' . $product->id, ['data' => $product]);
-
+            // Optionally, redirect to a page (e.g., product details) with a success message
             return redirect()->route('Products.show', $product->id)->with('success', 'Product updated successfully.');
         } catch (\Exception $e) {
             // Log the error and redirect back with an error message

@@ -6,7 +6,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\LoginController;
-use APP\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\MpesaController;
 
@@ -40,6 +39,9 @@ Route::middleware(['auth'])->group(function () {
 
 
 //product controller
+Route::middleware(['auth', 'is_admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('Admin.index');
+    Route::post('/logoutAdmin', [AdminController::class, 'destroy'])->name('Admin.logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('Admin.index');
     Route::get('/logoutAdmin', [AdminController::class, 'destroy'])->name('Admin.logout');
@@ -47,9 +49,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/storeProduct', [ProductController::class, 'store'])->name('Products.store'); //stores the product
     Route::get('/showProduct/{id}', [ProductController::class, 'show'])->name('Products.show'); //show a single product
     Route::get('/editProduct/{id}/edit', [ProductController::class, 'edit'])->name('Products.edit'); //displays the form to edit a product
-    Route::post('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update'); //updates the product
+    Route::put('/updateProduct/{id}', [ProductController::class, 'update'])->name('Products.update'); //updates the product
     Route::delete('/deleteProduct/{id}', [ProductController::class, 'destroy'])->name('Products.delete'); //deletes the product
 });
+
 
 
 //cart controller
@@ -81,7 +84,7 @@ Route::get('/search', [LandingPageController::class, 'search']);
 
 //LoginController
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('Auth.login');
-Route::post('/login', [LoginController::class, 'login'])->name('Auth.loginUser');
+Route::post('/handlelogin', [LoginController::class, 'login'])->name('Auth.loginUser');
 
 //registerController
 Route::get('/register', [RegisterController::class, 'Register'])->name('Auth.register');
@@ -90,7 +93,7 @@ Route::post('registerUser', [RegisterController::class, 'RegisterUser']);
 
 
 //paymentController
-Route::get('/payment', [PaymentController::class, 'index'])->name('payment.checkout');
+
 
 //paypalcontroller
 Route::get('/create-transaction', [PaypalController::class, 'createTransaction'])->name('createTransaction');
