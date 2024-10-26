@@ -107,16 +107,7 @@ class ProductController extends Controller
             $product->stock = $validatedData['stock'];
 
             // Log the product data before saving to confirm everything is set correctly
-            Log::info('Product attributes before saving:', [
-                'name' => $product->name,
-                'description' => $product->description,
-                'SKU' => $product->SKU,
-                'price' => $product->price,
-                'category_id' => $product->category_id,
-                'inventory_id' => $product->inventory_id,
-                'discount_id' => $product->discount_id,
-                'stock' => $product->stock
-            ]);
+
 
             // Save the product
             $product->save();
@@ -150,38 +141,68 @@ class ProductController extends Controller
         return view('Products.edit', compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function show(string $id)
     {
-        // Validate the incoming data
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'image_path' => 'nullable|url',
-            'description' => 'required|max:1000',
-            'SKU' => 'required',
-            'price' => 'required'
-        ]);
-
-        Log::info('Validation passed, proceeding to update product.', ['data' => $validatedData]);
-
-        try {
-            // Find the product
-            $product = Product::findOrFail($id);
-            $product->update($validatedData);
-
-            // Optionally, redirect to a page (e.g., product details) with a success message
-            return redirect()->route('Products.show', $product->id)->with('success', 'Product updated successfully.');
-        } catch (\Exception $e) {
-            // Log the error and redirect back with an error message
-            Log::error('Error updating product: ' . $e->getMessage());
-            return back()->withErrors(['error' => 'Failed to update product.'])->withInput();
+        //
+        $product = Product::findOrFail($id);
+        if (!$product) {
+            abort(404);
         }
+        return view('Products.show', compact('product'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     * /** */
 
 
+    public function update(Request $request, string $id)
+    {
+        try {
+            $request->validate([
+                'name' => 'required',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'description' => 'required|max:1000',
+                'price' => 'required|numeric|min:0',
+                'category_id' => 'required|exists:product_category,id',
+                'stock' => 'required|integer|min:0',
+
+            ]);
+            Log::info('Validation passed, proceeding to update product.', ['data' => $request->all()]);
+
+            $product = Product::findOrFail($id);
+            if (!$product) {
+                abort(404);
+            }
+
+            if ($request->hasFile('image')) {
+                // Delete old image if it exists
+                if ($product->image_path && Storage::exists('public/' . $product->image_path)) {
+                    Storage::delete('public/' . $product->image_path);
+                }
+
+                // Save new image
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $imagePath = $image->storeAs('public/images', $imageName);
+                $product->image_path = str_replace('public/', '', $imagePath); // Store new path
+            }
+            Log::info('Product found', ['product' => $product]);
+            $product->name = $request->name;
+            $product->description = $request->description;
+            $product->price = $request->price;
+            $product->category_id = $request->category_id;
+            $product->stock = $request->stock;
+            $product->save();
+            Log::info('Product updated successfully', ['product' => $product]);
+
+            return redirect()->route('Products.show', ['id' => $product->id])
+                ->with('success', 'Product updated successfully');
+        } catch (\Exception $e) {
+            Log::error('Error updating product:', ['error' => $e->getMessage()]);
+            return response()->json(['message' => 'Error updating product', 'error' => $e->getMessage()], 500);
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */

@@ -44,6 +44,11 @@
                             @endforeach
                         </select>
                     </div>
+                    <!-- Description -->
+                    <div class="mb-4">
+                        <label for="description" class="block text-gray-700">Description:</label>
+                        <textarea name="description" id="description" class="w-full px-3 py-2 border rounded">{{ $product->description }}</textarea>
+                    </div>
                     <!-- Price -->
                     <div class="mb-4">
                         <label for="price" class="block text-gray-700">Price:</label>

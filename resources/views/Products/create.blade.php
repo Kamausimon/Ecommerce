@@ -49,6 +49,7 @@
                             <span class="text-red-500 text-xs italic">{{ $message }}</span>
                             @enderror
 
+
                             <!-- Price Field -->
                             <div>
                                 <label for="price" class="block text-sm font-medium text-gray-700">Price:</label>
