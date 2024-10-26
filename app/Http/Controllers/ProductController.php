@@ -172,13 +172,18 @@ class ProductController extends Controller
             'name' => 'required',
             'image_path' => 'nullable|url',
             'description' => 'required|max:1000',
-            'SKU' => 'required',
-            'price' => 'required'
+            'stock' => 'required',
+            'price' => 'required',
+            'category_id' => 'required|exists:product_category,id'
         ]);
+
+        Log::info('Validation passed, proceeding to update product.', ['data' => $validatedData]);
 
         try {
             $product = Product::findOrFail($id);
             $product->update($validatedData);
+
+            Log::info('Product updated successfully: ' . $product->id, ['data' => $product]);
 
             // Optionally, redirect to a page (e.g., product details) with a success message
             return redirect()->route('Products.show', $product->id)->with('success', 'Product updated successfully.');
@@ -198,7 +203,7 @@ class ProductController extends Controller
         try {
             $product = Product::findOrFail($id);
             $product->delete();
-            return redirect()->route('admin.index')->with('success', 'Product deleted successfully');
+            return redirect()->route('Admin.index')->with('success', 'Product deleted successfully');
         } catch (\Exception $e) {
             Log::error('error deleting the product' . $e->getMessage());
             return back()->withErrors(['error' => 'failed to delete product'])->withInput();
