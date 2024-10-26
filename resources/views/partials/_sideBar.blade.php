@@ -1,10 +1,11 @@
-<div class="lg:fixed w-64 p-0 m-0 h-screen bg-gray-100">
+<!-- Sidebar -->
+<div class="fixed lg:static inset-y-0 left-0 z-30 w-64 lg:w-64 overflow-y-auto bg-gray-100 transition-transform transform lg:translate-x-0 -translate-x-full " id="sidebar">
     <a href="{{ route('dashboard.index') }}" class="mt-3">
-        <img class="block mt-4" src="/images/shope-high-resolution-logo-transparent.png" alt="logo" />
+        <img class="block mt-4 mx-auto lg:mx-0" src="/images/shope-high-resolution-logo-transparent.png" alt="logo" />
     </a>
 
     <div class="mt-24">
-        <h2 class="text-xl font-semibold text-gray-700">Categories</h2>
+        <h2 class="text-xl font-semibold text-gray-700 text-center lg:text-left">Categories</h2>
         <ul class="mt-6">
             @foreach($categories as $category)
             <li class="relative">
@@ -32,6 +33,7 @@
         </ul>
     </div>
 </div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
