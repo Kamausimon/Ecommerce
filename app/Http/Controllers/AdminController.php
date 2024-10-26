@@ -14,7 +14,7 @@ class AdminController extends Controller
     public function index()
     {
         $products = Product::with('category')->get();
-        return view('admin.index', compact('products'));
+        return view('Admin.index', compact('products'));
     }
 
     public function destroy(Request $request)
