@@ -28,9 +28,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             // Fetch categories
             $categories = ProductCategory::whereNull('parent_id')->with('subcategories')->get();
 
-            Log::info($categories);
-            Log::info('View composer is executed');
-            Log::info("categories:", ["categories" => $categories]);
+
 
 
             $view->with('categories', $categories);
