@@ -11,7 +11,7 @@
         <div class="flex gap-x-10">
             @if(Auth::check() && Auth::user()->role === 'admin')
             <div class="flex items-center justify-center  hover:bg-gray-100 text-white">
-                <a href="{{ route('admin.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
+                <a href="{{ route('Admin.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
                     Admin Dashboard
                 </a>
             </div>
