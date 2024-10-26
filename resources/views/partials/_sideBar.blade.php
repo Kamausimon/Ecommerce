@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<div class="fixed lg:static inset-y-0 left-0 z-30 w-64 lg:w-64 overflow-y-auto bg-gray-100 transition-transform transform lg:translate-x-0 -translate-x-full " id="sidebar">
+<div class="fixed lg:static inset-y-0 left-0 z-30 w-64 lg:w-64 overflow-y-auto bg-gray-100 transition-transform transform -translate-x-full lg:translate-x-0" id="sidebar">
     <a href="{{ route('dashboard.index') }}" class="mt-3">
         <img class="block mt-4 mx-auto lg:mx-0" src="/images/shope-high-resolution-logo-transparent.png" alt="logo" />
     </a>
@@ -33,42 +33,3 @@
         </ul>
     </div>
 </div>
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(button => {
-            button.addEventListener('click', function() {
-                const dropdown = this.nextElementSibling;
-                dropdown.classList.toggle('hidden');
-                // Close other dropdowns
-                document.querySelectorAll('ul.absolute').forEach(menu => {
-                    if (menu !== dropdown) {
-                        menu.classList.add('hidden');
-                    }
-                });
-            });
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.subcategory-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const subcategoryId = this.getAttribute('data-subcategory-id');
-                fetch(`/products/subcategory/${subcategoryId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Assuming you have a div with id="product-container" to display the products
-                        const productContainer = document.getElementById('product-container');
-                        productContainer.innerHTML = ''; // Clear previous products
-                        data.products.forEach(product => {
-                            // Update this part to match how you want to display the products
-                            productContainer.innerHTML += `<div>${product.name}</div>`;
-                        });
-                    })
-                    .catch(error => console.error('Error fetching products:', error));
-            });
-        });
-    });
-</script>

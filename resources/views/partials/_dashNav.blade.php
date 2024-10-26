@@ -14,47 +14,33 @@
             Admin Dashboard
         </a>
         @endif
-        <div>
-            <div class="flex gap-x-10">
-                @if(Auth::check() && Auth::user()->role === 'admin')
-                <div class="flex items-center justify-center  hover:bg-gray-100 text-white">
-                    <a href="{{ route('Admin.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
-                        Admin Dashboard
-                    </a>
-                </div>
-                @endif
 
-                <a href="{{route('cart.index')}}" class="flex items-center text-white hover:text-blue-500">
-                    <span class="mr-1">Cart</span>
-                    <!-- Cart Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a... (SVG Path Data) ..."></path>
-                    </svg>
-                </a>
+        <a href="{{route('cart.index')}}" class="flex items-center text-white hover:text-blue-500">
+            <span class="mr-1">Cart</span>
+            <!-- Cart Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor">
+                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a... (SVG Path Data) ..."></path>
+            </svg>
+        </a>
 
-                <a href="{{route('profile.index')}}" class="flex items-center text-white hover:text-blue-500">
-                    <span class="mr-1">Account</span>
-                    <!-- Account Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor">
-                        <path d="M4 18a4 4 0 0 1 4-4h8a... (SVG Path Data) ..."></path>
-                    </svg>
-                </a>
+        <a href="{{route('profile.index')}}" class="flex items-center text-white hover:text-blue-500">
+            <span class="mr-1">Account</span>
+            <!-- Account Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor">
+                <path d="M4 18a4 4 0 0 1 4-4h8a... (SVG Path Data) ..."></path>
+            </svg>
+        </a>
 
-                <form action="{{ route('Auth.logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="bg-red-500 p-2 ml-2 hover:bg-red-800 rounded-md">
-                        <div class="flex space-x-3">
-                            <span class="ml-2">Logout</span>
-                            <svg class="mt-1" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                                <path fill="grey" d="M5 5h7V3H3v18h9v-2H5z" />
-                                <path fill="grey" d="m21 12l-4-4v3H9v2h8v3z" />
-                            </svg>
-                        </div>
-
-                    </button>
-                </form>
-
-            </div>
-        </div>
-
+        <form action="{{ route('Auth.logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="flex items-center bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700">
+                <span class="mr-1">Logout</span>
+                <!-- Logout Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor">
+                    <path d="M5 5h7V3H3v18h9v-2H5z"></path>
+                    <path d="M21 12l-4-4v3H9v2h8v3z"></path>
+                </svg>
+            </button>
+        </form>
     </div>
+</div>
