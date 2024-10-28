@@ -75,7 +75,7 @@ Route::middleware(['auth'])->group(function () {
 
 //landingPageController
 Route::get('/', [LandingPageController::class, 'index'])->name('User.welcome');
-Route::get('/landing/{id}', [LandingPageController::class, 'show'])->name('landing.show');
+Route::get('/landing/{id}', [LandingPageController::class, 'show'])->name('Landing.show');
 Route::get('/search', [LandingPageController::class, 'search']);
 
 
