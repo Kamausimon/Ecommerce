@@ -21,7 +21,7 @@ class cartController extends Controller
             $totalPrice += $item['price'] * $item['quantity'];
         }
 
-        $discount = $totalPrice * 0.05;
+        $discount = $totalPrice * 0.00;
 
         // Calculate subtotal after discount
         $subtotal = $totalPrice - $discount;
