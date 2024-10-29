@@ -22,11 +22,18 @@ use Illuminate\Support\Facades\Log;
 
 
 
-//profileController
-Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.index');
+// Profile Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.index');
+    Route::get('/editProfile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/updateProfile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/deleteProfile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Password Routes
+    Route::get('/profile/password', [ProfileController::class, 'showPasswordForm'])->name('profile.passwordForm');
+    Route::post('/profile/password', [ProfileController::class, 'password'])->name('profile.passwordUpdate');
+});
+
 
 
 //dashboard controller
@@ -75,7 +82,7 @@ Route::middleware(['auth'])->group(function () {
 
 //landingPageController
 Route::get('/', [LandingPageController::class, 'index'])->name('User.welcome');
-Route::get('/landing/{id}', [LandingPageController::class, 'show'])->name('Landing.show');
+Route::get('/landing/{id}', [LandingPageController::class, 'show'])->name('landing.show');
 Route::get('/search', [LandingPageController::class, 'search']);
 
 

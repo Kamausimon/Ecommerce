@@ -45,6 +45,6 @@ class LandingPageController extends Controller
         $product = Product::findOrFail($id);
         Log::info("product retrieved");
 
-        return view('Landing.show', ['product' => $product]);
+        return view('landing.show', ['product' => $product]);
     }
 }

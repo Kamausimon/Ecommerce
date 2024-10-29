@@ -11,6 +11,16 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
+    //show the user
+
+    public function profile(Request $request): View
+    {
+        return view('profile.index', [
+            'user' => $request->user(),
+        ]);
+    }
+
     /**
      * Display the user's profile form.
      */
@@ -35,6 +45,26 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    public function showPasswordForm(): View
+    {
+        return view('profile.passwordForm');
+    }
+
+    // Update the user's password
+    public function password(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'password' => ['required', 'current_password'],
+            'new_password' => ['required', 'confirmed', 'min:8'],
+        ]);
+
+        $request->user()->update([
+            'password' => bcrypt($request->new_password),
+        ]);
+
+        return Redirect::route('profile.passwordForm')->with('status', 'password-updated');
     }
 
     /**
